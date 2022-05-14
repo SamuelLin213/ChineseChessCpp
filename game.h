@@ -86,6 +86,7 @@ int playGame(int status)
         {
           return 3;
         }
+        
       }
     }
     else{
@@ -124,6 +125,7 @@ void saveGame()
     {
       outData << blackCoors[x][y] << " ";
     }
+    outData << blackCoors[x][2] << endl;
   }
 }
 
