@@ -4,18 +4,6 @@
 #include "chessDisplay.h"
 using namespace std;
 
-vector<string> pieces;
-int NUM_PIECES = 7;
-int PIECE_TOTAL = 16;
-
-// Board dimensions
-int BOARD_WIDTH = 9;
-int BOARD_HEIGHT = 10;
-
-// Vectors of coordinates, for input/output to textfile
-vector<vector<int>> redCoors(16, vector<int>(2, 0));
-vector<vector<int>> blackCoors(16, vector<int>(2, 0));
-
 void printIndex() {
   cout << left << setw(15) << "1 - General" << setw(15) << "2 - Guard" << endl;
   cout << setw(15) << "3 - Elephant" << setw(15) << "4 - Horse" << endl;
@@ -23,32 +11,8 @@ void printIndex() {
   cout << setw(15) << "7 - Soldier" << endl << endl;
 }
 
-void defaultCoordinates()
-{
-  // hard-code default coordinates for black pieces
-  blackCoors[0] = {4, 0};
-  blackCoors[1] = {3, 0};
-  blackCoors[2] = {5, 0};
-  blackCoors[3] = {2, 0};
-  blackCoors[4] = {6, 0};
-  blackCoors[5] = {1, 0};
-  blackCoors[6] = {7, 0};
-  blackCoors[7] = {0, 0};
-  blackCoors[8] = {8, 0};
-  blackCoors[9] = {1, 2};
-  blackCoors[10] = {7, 2};
-  blackCoors[11] = {0, 3};
-  blackCoors[12] = {2, 3};
-  blackCoors[13] = {4, 3};
-  blackCoors[14] = {6, 3};
-  blackCoors[15] = {8, 3};
-
-
-}
-
 int playGame()
 {
-  defaultCoordinates();
 
   bool done = false; // when checkmate or end of game(quit/save)
   int pieceChoice;
