@@ -1,4 +1,6 @@
 #include <iomanip>
+#include "chessDisplay.h"
+#include "game.h"
 #include <iostream>
 using namespace std;
 
@@ -28,12 +30,15 @@ int main()
     {
       case 1: // Choice to start new game
       {
-
+        
+        choice = playGame();
         break;
       }
       case 2: // Choice to continue saved game
       {
+        loadGame();
 
+        choice = playGame();
         break;
       }
       case 3: // Choice to exit program
@@ -52,7 +57,7 @@ int printMenu()
 {
   int choice = 0;
 
-  cout << "\033[2J\033[1;1H"; //Clears the terminal screen
+  clearScreen();
   cout << "1. Start new game" << endl;
   cout << "2. Load saved game" << endl;
   cout << "3. Quit" << endl;
