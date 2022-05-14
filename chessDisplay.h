@@ -44,9 +44,10 @@ void defaultCoordinates()
   blackCoors[15] = {8, 3, 7};
 }
 
-void printDefault()
+void updateChars(int status)
 {
-  defaultCoordinates();
+  if(status == 1)
+    defaultCoordinates();
 
   for(int a = 0; a < 16; a++)
   {
@@ -55,6 +56,17 @@ void printDefault()
 
     boardChars[yC][xC] = pieceNum + 48;
   }
+}
+
+void clearScreen()
+{
+  cout << "\033[2J\033[1;1H"; //Clears the terminal screen
+}
+
+void printBoard(int status)
+{
+  // Will's board implementation
+  updateChars(status);
 
   int x, y;
   for(x = 0; x < 9; x++)
@@ -80,17 +92,6 @@ void printDefault()
     cout << boardChars[9][z] << " -- ";
   }
   cout << boardChars[9][8] << endl;
-}
-
-void clearScreen()
-{
-  cout << "\033[2J\033[1;1H"; //Clears the terminal screen
-}
-
-void printBoard()
-{
-  // Will's board implementation
-  printDefault();
 
   cout << endl;
 }

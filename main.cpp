@@ -30,15 +30,14 @@ int main()
     {
       case 1: // Choice to start new game
       {
-        
-        choice = playGame();
+        choice = playGame(1);
         break;
       }
       case 2: // Choice to continue saved game
       {
         loadGame();
 
-        choice = playGame();
+        choice = playGame(2);
         break;
       }
       case 3: // Choice to exit program

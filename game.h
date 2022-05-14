@@ -4,6 +4,8 @@
 #include "chessDisplay.h"
 using namespace std;
 
+bool saved = false;
+
 void printIndex() {
   cout << left << setw(15) << "1 - General" << setw(15) << "2 - Guard" << endl;
   cout << setw(15) << "3 - Elephant" << setw(15) << "4 - Horse" << endl;
@@ -11,7 +13,7 @@ void printIndex() {
   cout << setw(15) << "7 - Soldier" << endl << endl;
 }
 
-int playGame()
+int playGame(int status)
 {
 
   bool done = false; // when checkmate or end of game(quit/save)
@@ -34,7 +36,7 @@ int playGame()
     // Replace with index w/ symbols for name of chess pieces
     printIndex();
 
-    printBoard();
+    printBoard(status);
 
     cout << "Enter a piece number, or enter 0 to quit: ";
     cin >> pieceChoice;
@@ -97,17 +99,32 @@ int playGame()
 
 void loadGame()
 {
-  clearScreen();
 
   ifstream inData;
   inData.open("coordinates.txt");
 
-
+  for(int x = 0; x < 16; x++)
+  {
+    for(int y = 0; y < 2; y++)
+    {
+      inData >> blackCoors[x][y];
+    }
+    inData >> blackCoors[x][2];
+  }
 }
 
 void saveGame()
 {
+  ofstream outData;
+  outData.open("coordinates.txt");
 
+  for(int x = 0; x < 16; x++)
+  {
+    for(int y = 0; y < 2; y++)
+    {
+      outData << blackCoors[x][y] << " ";
+    }
+  }
 }
 
 #endif
