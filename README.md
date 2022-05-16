@@ -44,6 +44,7 @@
  > Include a **class diagram(s)** for your project and a **description** of the diagram(s). Your class diagram(s) should include all the main classes you plan for the project. This should be in sufficient detail that another group could pick up the project this point and successfully complete it. Use proper UML notation (as discussed in the course slides).
  ![UML Notation](uml_notation.png)
  > * The Chessboard class represents the playing board and is composed of objects of the Chessboard Spot class. This class contains data members describing the occuptation status(piece and color) of each spot. Each spot is composed of a Piece object, which is a base class from which all the separate pieces inherit from(general, soldier, cannon, elephant, chariot, guard, horse). Enums are used for the piece names and the player colors. 
+ > * The strategy design pattern occurs with the piece class, which allows for the right variation of the validMove() function to be called, when checking that the next move is valid, according to the allowed movement for each piece. 
  
  > ## Phase III
  > You will need to schedule a check-in for the second scrum meeting with the same reader you had your first scrum meeting with (using Calendly). Your entire team must be present. This meeting will occur on week 8 during lab time.
