@@ -1,11 +1,7 @@
 #ifndef CHESS_DISPLAY_H
 #define CHESS_DISPLAY_H
 
-#include <iostream>
-#include <vector>
-// #include <set>
-#include <iomanip>
-#include <fstream>
+#include "enums.h"
 using namespace std;
 
 // Stores char of spots on chessbaord

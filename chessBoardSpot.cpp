@@ -1,30 +1,32 @@
 #include "chessBoardSpot.h"
-#include <boost/algorithm/string.hpp>
 
-class chessBoardSpot;
+class ChessBoardSpot;
+using namespace std;
 
-void chessBoardSpot::setColor(string color_)
+void ChessBoardSpot::setColor(string color_)
 {
-  string colorLower = boost::algorithm::to_lower(color_)
+  transform(color_.begin(), color_.end(), color_.begin(),
+    [](unsigned char c){ return std::tolower(c); });
 
-  if(colorLower == "black")
+  if(color_ == "black")
   {
     this->color = BLACK;
   }
-  else if(colorLower == "red")
+  else if(color_ == "red")
   {
     this->color = RED;
   }
 }
-string chessBoardSpot::getColor()
+string ChessBoardSpot::getColor()
 {
-  return this->color;
+  // return this->color;
+  return "";
 }
-void chessBoardSpot::setOccupied(bool occupied_)
+void ChessBoardSpot::setOccupied(bool occupied_)
 {
   this->occupied = occupied_;
 }
-bool chessBoardSpot::getOccupied()
+bool ChessBoardSpot::getOccupied()
 {
   return this->occupied;
 }

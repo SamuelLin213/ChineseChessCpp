@@ -1,7 +1,6 @@
-#include <iomanip>
-#include "chessDisplay.h"
+#include "enums.h"
+#include "chessBoard.h"
 #include "game.h"
-#include <iostream>
 using namespace std;
 
 int printMenu(); // forward declaration
