@@ -77,11 +77,18 @@ void clearScreen()
 
 void printBoard(int status, ChessBoardSpot** spots)
 {
+  // print column nums
+  cout << setw(3) << " ";
+  for(int x = 0; x < 9; x++)
+  {
+    cout << MAGENTA << left << setw(5) << x+1;
+  }
+  cout << endl << RESET;
 
   int x, y;
   for(x = 0; x <= 9; x++)
   {
-    //prints first
+    cout << MAGENTA << setw(3) << x+1 << RESET;
     for(y = 0; y <= 8; y++)
     {
       if(spots[x][y].getColor() == BLACK)
@@ -95,11 +102,12 @@ void printBoard(int status, ChessBoardSpot** spots)
     cout << endl;
     if(x == 4)
     {
-      cout << left << setw(40) << "|" << "|" << endl;
+      cout << setw(3) << "" << left << setw(40) << "|" << "|" << endl;
       continue;
     }
     if(x != 9)
     {
+      cout << setw(3) << "";
       for(y = 0; y <= 8; y++)
       {
         cout << "|    ";
@@ -107,19 +115,6 @@ void printBoard(int status, ChessBoardSpot** spots)
       cout << endl;
     }
   }
-  // for(int z = 0; z < 8; z++)
-  // {
-  //   if(spots[9][z].getColor() == BLACK)
-  //     cout << BLACK_C;
-  //   else if(spots[9][z].getColor() == RED)
-  //       cout << RED_C;
-  //   cout << spots[9][z].getChar() << RESET << " -- ";
-  // }
-  // if(spots[9][8].getColor() == BLACK)
-  //   cout << BLACK_C;
-  // else if(spots[9][8].getColor() == RED)
-  //       cout << RED_C;
-  // cout << spots[9][8].getChar() << RESET << endl;
 
   cout << endl;
 }

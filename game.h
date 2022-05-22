@@ -72,47 +72,44 @@ int playGame(int status)
 
   // updateChars(status, spots);
 
-  AGAIN:clearScreen();
-
   while(!done)
   {
+    AGAIN:clearScreen();
+
     printIndex();
+
+    cout << "CURRENT TURN: ";
+    if(redTurn)
+      cout << "RED";
+    else
+      cout << "BLACK";
+    cout << endl << endl;
 
     printBoard(status, spots);
 
-    cout << "Enter the coordinates of the piece to select, or enter -1 to quit: ";
+    cout << "Enter the coordinates of the piece to select, or enter 0 to quit: ";
     cin >> coorsO[0];
 
-    if(coorsO[0] == -1)
+    if(coorsO[0] == 0)
     {
       return 3;
     }
     cin >> coorsO[1];
 
-    if(coorsO[1] == -1)
+    if(coorsO[1] == 0)
     {
       return 3;
     }
-    while(coorsO[0] < -1 || coorsO[0] > BOARD_WIDTH || coorsO[1] < -1 || coorsO[1] > BOARD_HEIGHT)
+    if(coorsO[0] < 0 || coorsO[0] > BOARD_WIDTH || coorsO[1] < 0 || coorsO[1] > BOARD_HEIGHT)
     {
       cout << "Invalid coordinates! Please try again.";
       cin.ignore();
       cin.get();
 
-      cout << "Enter the coordinates of the piece to select, or enter -1 to quit: ";
-      cin >> coorsO[0];
-
-      if(coorsO[0] == 0)
-      {
-        return 3;
-      }
-      cin >> coorsO[1];
-
-      if(coorsO[1] == 0)
-      {
-        return 3;
-      }
+      goto AGAIN;
     }
+    coorsO[0] -= 1;
+    coorsO[1] -= 1;
 
     //ChessBoardSpot temp = spots[0][0];
     ChessBoardSpot temp = spots[coorsO[1]][coorsO[0]];
@@ -139,9 +136,6 @@ int playGame(int status)
       cin.ignore();
       cin.get();
 
-      cin.clear();
-      cin.ignore(10000,'\n');
-
       goto AGAIN;
     }
 
@@ -150,45 +144,48 @@ int playGame(int status)
 
     if(tolower(confirm) == 'y')
     {
-      cout << "Enter the new coordinates(x y), with a space in between, or -1 to quit: ";
+      cout << "Enter the new coordinates(x y), with a space in between, or 0 to quit: ";
       cin >> coors[0];
 
-      if(coors[0] == -1)
+      if(coors[0] == 0)
       {
         return 3;
       }
 
       cin >> coors[1];
 
-      if(coors[1] == -1)
+      if(coors[1] == 0)
       {
         return 3;
       }
 
-      while(coors[0] < -1 || coors[0] > BOARD_WIDTH || coors[1] < -1 || coors[1] > BOARD_HEIGHT)
+      if(coors[0] < 0 || coors[0] > BOARD_WIDTH || coors[1] < 0 || coors[1] > BOARD_HEIGHT)
       {
         cout << "Invalid coordinates! Please try again.";
         cin.ignore();
         cin.get();
 
-        cout << "Enter the new coordinates(x y), with a space in between, or -1 to quit: ";
+        cout << "Enter the new coordinates(x y), with a space in between, or 0 to quit: ";
         cin >> coors[0];
 
-        if(coors[0] == -1)
+        if(coors[0] == 0)
         {
           return 3;
         }
 
         cin >> coors[1];
 
-        if(coors[1] == -1)
+        if(coors[1] == 0)
         {
           return 3;
         }
       }
+      coors[0] -= 1;
+      coors[1] -= 1;
 
+      // Check target spot is empty
 
-      redTurn = !redTurn;
+      redTurn = !redTurn; // inverses so that it's the other player's turn
     }
     else{
       goto AGAIN;
