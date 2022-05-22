@@ -1,12 +1,18 @@
 #ifndef GAME_H
 #define GAME_H
 
+
+chessBoardSpot myBoard[9][10]; 
+#include "chessBoardSpot.h"
 #include "enums.h"
 #include "chessDisplay.h"
 #include <unordered_map>
 using namespace std;
-
 bool saved = false;
+void setUpBlackPieces();
+void setUpRedPieces();
+void setUpEmptyBlack();
+void setUpEmptyRed();
 
 void printIndex() {
   cout << "PIECE INDEX: " << endl;
@@ -24,7 +30,7 @@ void printIndex() {
 
 int playGame(int status)
 {
-
+  setUpBoard(); // we call this fucntion inorder to setup up our 2d array and get the game ready
   bool done = false; // when checkmate or end of game(quit/save)
   string pieceChoice;
   int coors[2];
@@ -152,4 +158,84 @@ void saveGame()
   }
 }
 
+// 16 players above 
+// 
+// 16 players below 
+void setUpBoard()
+{
+    myBoard[0][0] = chessBoardSpot(4, false, 1, 'C' ); // Chariot
+    myBoard[0][1] = chessBoardSpot(3, false, 1, 'H' ); // Horse
+    myBoard[0][2] = chessBoardSpot(2, false, 1, 'E' ); // Elepahnt
+    myBoard[0][3] = chessBoardSpot(1, false, 1, 'A' ); // Advisor
+    myBoard[0][4] = chessBoardSpot(0, false, 1, 'G' ); // General
+    myBoard[0][5] = chessBoardSpot(1, false, 1, 'A' ); // Advisor
+    myBoard[0][6] = chessBoardSpot(2, false, 1, 'E' ); // Elepahnt
+    myBoard[0][7] = chessBoardSpot(3, false, 1, 'H' ); // Horse
+    myBoard[0][8] = chessBoardSpot(4, false, 1, 'C' ); // Chariot
+    myBoard[2][1] = chessBoardSpot(5, false, 1, 'C' ); // Pao
+    myBoard[2][7] = chessBoardSpot(5, false, 1, 'C' ); // Pao
+    myBoard[3][0] = chessBoardSpot(5, false, 1, 'S' ); // Soilder
+    myBoard[3][2] = chessBoardSpot(5, false, 1, 'S' ); // Soilder
+    myBoard[3][4] = chessBoardSpot(5, false, 1, 'S' ); // Soilder
+    myBoard[3][6] = chessBoardSpot(5, false, 1, 'S' ); // Soilder
+    myBoard[3][8] = chessBoardSpot(5, false, 1, 'S' ); // Soilder
+
+}
+
+void setUpRedPieces()
+{
+    myBoard[9][0] = chessBoardSpot(4, false, 0, 'C' ); // Chariot
+    myBoard[9][1] = chessBoardSpot(3, false, 0, 'H' ); // Horse
+    myBoard[9][2] = chessBoardSpot(2, false, 0, 'E' ); // Elepahnt
+    myBoard[9][3] = chessBoardSpot(1, false, 0, 'A' ); // Advisor
+    myBoard[9][4] = chessBoardSpot(0, false, 0, 'G' ); // General
+    myBoard[9][5] = chessBoardSpot(1, false, 0, 'A' ); // Advisor
+    myBoard[9][6] = chessBoardSpot(2, false, 0, 'E' ); // Elepahnt
+    myBoard[9][7] = chessBoardSpot(3, false, 0, 'H' ); // Horse
+    myBoard[9][8] = chessBoardSpot(4, false, 0, 'C' ); // Chariot
+    myBoard[7][1] = chessBoardSpot(5, false, 0, 'C' ); // Pao
+    myBoard[7][7] = chessBoardSpot(5, false, 0, 'C' ); // Pao
+    myBoard[6][0] = chessBoardSpot(5, false, 0, 'S' ); // Soilder
+    myBoard[6][2] = chessBoardSpot(5, false, 0, 'S' ); // Soilder
+    myBoard[6][4] = chessBoardSpot(5, false, 0, 'S' ); // Soilder
+    myBoard[6][6] = chessBoardSpot(5, false, 0, 'S' ); // Soilder
+    myBoard[6][8] = chessBoardSpot(5, false, 0, 'S' ); // Soilder
+}
+
+void setUpEmptyBlack()
+{
+    for(int i = 0; i <= 8; i++)
+        myBoard[1][i] = chessBoardSpot(7, true, 3, 'N' ); 
+    
+    myBoard[2][0] = chessBoardSpot(7, true, 3, 'N' ); 
+    myBoard[2][8] = chessBoardSpot(7, true, 3, 'N' ); 
+    
+    for(int i = 2; i <= 6; i++)
+        myBoard[2][i] = chessBoardSpot(7, true, 3, 'N' ); 
+
+    myBoard[3][1] = chessBoardSpot(7, true, 3, 'N' ); 
+    myBoard[3][3] = chessBoardSpot(7, true, 3, 'N' ); 
+    myBoard[3][5] = chessBoardSpot(7, true, 3, 'N' ); 
+    myBoard[3][7] = chessBoardSpot(7, true, 3, 'N' ); 
+
+    for(int i = 0; i <= 8; i++)
+        myBoard[4][i] = chessBoardSpot(7, true, 3, 'N' ); 
+}
+
+void setUpEmptyRed()
+{
+    for(int i = 0; i <= 8; i++)
+      myBoard[5][i] = chessBoardSpot(7, true, 3, 'N' ); 
+
+    myBoard[6][1] = chessBoardSpot(7, true, 3, 'N' ); 
+    myBoard[6][3] = chessBoardSpot(7, true, 3, 'N' ); 
+    myBoard[6][5] = chessBoardSpot(7, true, 3, 'N' ); 
+    myBoard[6][7] = chessBoardSpot(7, true, 3, 'N' ); 
+
+    myBoard[7][0] = chessBoardSpot(7, true, 3, 'N' ); 
+    myBoard[7][8] = chessBoardSpot(7, true, 3, 'N' ); 
+
+    for(int i = 0; i <= 8; i++)
+        myBoard[8][i] = chessBoardSpot(7, true, 3, 'N' ); 
+}
 #endif

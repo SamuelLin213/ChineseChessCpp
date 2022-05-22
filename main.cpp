@@ -7,6 +7,9 @@ int printMenu(); // forward declaration
 void readGame(); // load saved game
 void writeGame(); // save current game
 
+
+
+
 int main()
 {
   int choice = 0; //stores the option that user chooses
@@ -76,3 +79,5 @@ int printMenu()
 
   return choice;
 }
+
+

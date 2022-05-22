@@ -3,6 +3,14 @@
 class ChessBoardSpot;
 using namespace std;
 
+ChessBoardSpot::ChessBoardSpot(pieceTypeEnum newPieceType, bool newOccupied, colorEnum newColor, char newBoardChar)
+{
+      piece = newPieceType;
+      occupied = newOccupied;
+      color = newColor;
+      boardChar = newBoardChar;
+}
+
 void ChessBoardSpot::setColor(string color_)
 {
   transform(color_.begin(), color_.end(), color_.begin(),

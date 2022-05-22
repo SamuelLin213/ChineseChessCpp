@@ -10,19 +10,20 @@
 #include <cctype>
 
 enum pieceTypeEnum {
-  GENERAL,
-  GUARD,
-  ELEPHANT,
-  HORSE,
-  CHARIOT,
-  CANNON,
-  SOLDIER
+  GENERAL = 0,
+  ADVISOR = 1,
+  ELEPHANT = 2,
+  HORSE = 3,
+  CHARIOT = 4,
+  PAO = 5, //cannon
+  SOLDIER = 6,
+  NONE = 7, 
 };
 
 enum colorEnum {
-  RED,
-  BLACK,
-  NONE
+  RED = 0,
+  BLACK = 1,
+  NONE = 3
 };
 
 // extern colorEnum color;

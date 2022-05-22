@@ -7,10 +7,11 @@
 
 using namespace std;
 
-class ChessBoardSpot{
+class ChessBoardSpot
+{
   public:
     ChessBoardSpot() {};
-
+    ChessBoardSpot(pieceTypeEnum piece, bool occupied, colorEnum color, char boardChar); 
     void setColor(string color_);
     string getColor();
 
