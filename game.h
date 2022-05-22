@@ -117,7 +117,7 @@ int playGame(int status)
     //ChessBoardSpot temp = spots[0][0];
     ChessBoardSpot temp = spots[coorsO[1]][coorsO[0]];
 
-    if(temp.getOccupied() == false)
+    if(temp.getPiece() == EMPTY)
     {
       cout << "Error: empty spot selected! Please choose a nonempty spot.";
       cin.ignore();
@@ -146,8 +146,6 @@ int playGame(int status)
     }
 
     cout << endl << "You chose " << temp.getPieceStr() << ". Confirm choice[y/n]: ";
-    cin >> confirm;
-    cout << "confirm choice";
     cin >> confirm;
 
     if(tolower(confirm) == 'y')
@@ -187,8 +185,9 @@ int playGame(int status)
         {
           return 3;
         }
-
       }
+
+
       redTurn = !redTurn;
     }
     else{
@@ -224,40 +223,40 @@ void loadGame(ChessBoardSpot** spots)
   }
 
   // Creating black pieces
-  spots[blackCoors[0][0]][blackCoors[0][1]].setData(GENERAL, true, BLACK, 'G', new generalMove());
-  spots[blackCoors[1][0]][blackCoors[1][1]].setData(ADVISOR, true, BLACK, 'A', new advisorMove());
-  spots[blackCoors[2][0]][blackCoors[2][1]].setData(ADVISOR, true, BLACK, 'A', new advisorMove());
-  spots[blackCoors[3][0]][blackCoors[3][1]].setData(ELEPHANT, true, BLACK, 'E', new elephantMove());
-  spots[blackCoors[4][0]][blackCoors[4][1]].setData(ELEPHANT, true, BLACK, 'E', new elephantMove());
-  spots[blackCoors[5][0]][blackCoors[5][1]].setData(HORSE, true, BLACK, 'H', new horseMove());
-  spots[blackCoors[6][0]][blackCoors[6][1]].setData(HORSE, true, BLACK, 'H', new horseMove());
-  spots[blackCoors[7][0]][blackCoors[7][1]].setData(CHARIOT, true, BLACK, 'C', new chariotMove());
-  spots[blackCoors[8][0]][blackCoors[8][1]].setData(CHARIOT, true, BLACK, 'C', new chariotMove());
-  spots[blackCoors[9][0]][blackCoors[9][1]].setData(CANNON, true, BLACK, 'P', new powMove());
-  spots[blackCoors[10][0]][blackCoors[10][1]].setData(CANNON, true, BLACK, 'P', new powMove());
-  spots[blackCoors[11][0]][blackCoors[11][1]].setData(SOLDIER, true, BLACK, 'S', new soldierMove());
-  spots[blackCoors[12][0]][blackCoors[12][1]].setData(SOLDIER, true, BLACK, 'S', new soldierMove());
-  spots[blackCoors[13][0]][blackCoors[13][1]].setData(SOLDIER, true, BLACK, 'S', new soldierMove());
-  spots[blackCoors[14][0]][blackCoors[14][1]].setData(SOLDIER, true, BLACK, 'S', new soldierMove());
-  spots[blackCoors[15][0]][blackCoors[15][1]].setData(SOLDIER, true, BLACK, 'S', new soldierMove());
+  spots[blackCoors[0][0]][blackCoors[0][1]].setData(GENERAL, BLACK, 'G', new generalMove());
+  spots[blackCoors[1][0]][blackCoors[1][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  spots[blackCoors[2][0]][blackCoors[2][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  spots[blackCoors[3][0]][blackCoors[3][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  spots[blackCoors[4][0]][blackCoors[4][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  spots[blackCoors[5][0]][blackCoors[5][1]].setData(HORSE,  BLACK, 'H', new horseMove());
+  spots[blackCoors[6][0]][blackCoors[6][1]].setData(HORSE,  BLACK, 'H', new horseMove());
+  spots[blackCoors[7][0]][blackCoors[7][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
+  spots[blackCoors[8][0]][blackCoors[8][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
+  spots[blackCoors[9][0]][blackCoors[9][1]].setData(CANNON,  BLACK, 'P', new powMove());
+  spots[blackCoors[10][0]][blackCoors[10][1]].setData(CANNON,  BLACK, 'P', new powMove());
+  spots[blackCoors[11][0]][blackCoors[11][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  spots[blackCoors[12][0]][blackCoors[12][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  spots[blackCoors[13][0]][blackCoors[13][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  spots[blackCoors[14][0]][blackCoors[14][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  spots[blackCoors[15][0]][blackCoors[15][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
 
   // Creating red pieces
-  spots[redCoors[0][0]][redCoors[0][1]].setData(GENERAL, true, RED, 'G', new generalMove());
-  spots[redCoors[1][0]][redCoors[1][1]].setData(ADVISOR, true, RED, 'A', new advisorMove());
-  spots[redCoors[2][0]][redCoors[2][1]].setData(ADVISOR, true, RED, 'A', new advisorMove());
-  spots[redCoors[3][0]][redCoors[3][1]].setData(ELEPHANT, true, RED, 'E', new elephantMove());
-  spots[redCoors[4][0]][redCoors[4][1]].setData(ELEPHANT, true, RED, 'E', new elephantMove());
-  spots[redCoors[5][0]][redCoors[5][1]].setData(HORSE, true, RED, 'H', new horseMove());
-  spots[redCoors[6][0]][redCoors[6][1]].setData(HORSE, true, RED, 'H', new horseMove());
-  spots[redCoors[7][0]][redCoors[7][1]].setData(CHARIOT, true, RED, 'C', new chariotMove());
-  spots[redCoors[8][0]][redCoors[8][1]].setData(CHARIOT, true, RED, 'C', new chariotMove());
-  spots[redCoors[9][0]][redCoors[9][1]].setData(CANNON, true, RED, 'P', new powMove());
-  spots[redCoors[10][0]][redCoors[10][1]].setData(CANNON, true, RED, 'P', new powMove());
-  spots[redCoors[11][0]][redCoors[11][1]].setData(SOLDIER, true, RED, 'S', new soldierMove());
-  spots[redCoors[12][0]][redCoors[12][1]].setData(SOLDIER, true, RED, 'S', new soldierMove());
-  spots[redCoors[13][0]][redCoors[13][1]].setData(SOLDIER, true, RED, 'S', new soldierMove());
-  spots[redCoors[14][0]][redCoors[14][1]].setData(SOLDIER, true, RED, 'S', new soldierMove());
-  spots[redCoors[15][0]][redCoors[15][1]].setData(SOLDIER, true, RED, 'S', new soldierMove());
+  spots[redCoors[0][0]][redCoors[0][1]].setData(GENERAL,  RED, 'G', new generalMove());
+  spots[redCoors[1][0]][redCoors[1][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
+  spots[redCoors[2][0]][redCoors[2][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
+  spots[redCoors[3][0]][redCoors[3][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
+  spots[redCoors[4][0]][redCoors[4][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
+  spots[redCoors[5][0]][redCoors[5][1]].setData(HORSE,  RED, 'H', new horseMove());
+  spots[redCoors[6][0]][redCoors[6][1]].setData(HORSE,  RED, 'H', new horseMove());
+  spots[redCoors[7][0]][redCoors[7][1]].setData(CHARIOT,  RED, 'C', new chariotMove());
+  spots[redCoors[8][0]][redCoors[8][1]].setData(CHARIOT,  RED, 'C', new chariotMove());
+  spots[redCoors[9][0]][redCoors[9][1]].setData(CANNON,  RED, 'P', new powMove());
+  spots[redCoors[10][0]][redCoors[10][1]].setData(CANNON,  RED, 'P', new powMove());
+  spots[redCoors[11][0]][redCoors[11][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  spots[redCoors[12][0]][redCoors[12][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  spots[redCoors[13][0]][redCoors[13][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  spots[redCoors[14][0]][redCoors[14][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  spots[redCoors[15][0]][redCoors[15][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
 
   inData.close();
 }

@@ -3,9 +3,8 @@
 class ChessBoardSpot;
 using namespace std;
 
-ChessBoardSpot::ChessBoardSpot(pieceTypeEnum piece_, bool occupied_,
-  colorEnum color_, char boardChar_, validMove* move_)
-    :piece{piece_}, occupied{occupied}, color{color_}, boardChar{boardChar_}, move{move_}
+ChessBoardSpot::ChessBoardSpot(pieceTypeEnum piece_, colorEnum color_, char boardChar_, validMove* move_)
+    :piece{piece_}, color{color_}, boardChar{boardChar_}, move{move_}
 {
 }
 
@@ -29,14 +28,14 @@ colorEnum ChessBoardSpot::getColor()
   // return this->color;
   return this->color;
 }
-void ChessBoardSpot::setOccupied(bool occupied_)
-{
-  this->occupied = occupied_;
-}
-bool ChessBoardSpot::getOccupied()
-{
-  return this->occupied;
-}
+// void ChessBoardSpot::setOccupied(bool occupied_)
+// {
+//   this->occupied = occupied_;
+// }
+// bool ChessBoardSpot::getOccupied()
+// {
+//   return this->occupied;
+// }
 
 pieceTypeEnum ChessBoardSpot::getPiece()
 {
@@ -68,6 +67,14 @@ bool ChessBoardSpot::movePiece()
 ChessBoardSpot::~ChessBoardSpot()
 {
   delete move;
+}
+
+void ChessBoardSpot::clear()
+{
+  this->piece = EMPTY;
+  this->color = NONE;
+  this->boardChar = '*';
+  this->move = nullptr;
 }
 
 string ChessBoardSpot::getPieceStr()
@@ -112,11 +119,10 @@ string ChessBoardSpot::getPieceStr()
   }
 }
 
-void ChessBoardSpot::setData(pieceTypeEnum piece_, bool occupied_, colorEnum color_,
+void ChessBoardSpot::setData(pieceTypeEnum piece_, colorEnum color_,
 char boardChar_, validMove* move_)
 {
   piece = piece_;
-  occupied = occupied_;
   color = color_;
   boardChar = boardChar_;
   move = move_;

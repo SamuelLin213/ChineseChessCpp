@@ -11,17 +11,16 @@ using namespace std;
 class ChessBoardSpot{
   public:
     ChessBoardSpot() {};
-    ChessBoardSpot(pieceTypeEnum piece_, bool occupied_,
-      colorEnum color_, char boardChar_, validMove* move_);
+    ChessBoardSpot(pieceTypeEnum piece_, colorEnum color_, char boardChar_, validMove* move_);
 
-    void setData(pieceTypeEnum piece_, bool occupied_, colorEnum color_,
+    void setData(pieceTypeEnum piece_, colorEnum color_,
     char boardChar_, validMove* move_);
 
     void setColor(colorEnum color_);
     colorEnum getColor();
 
-    void setOccupied(bool occupied_);
-    bool getOccupied();
+    // void setOccupied(bool occupied_);
+    // bool getOccupied();
 
     pieceTypeEnum getPiece();
     string getPieceStr();
@@ -33,10 +32,12 @@ class ChessBoardSpot{
     void setMove(validMove* move_);
     bool movePiece();
 
+    void clear();
+
     ~ChessBoardSpot();
   private:
-    pieceTypeEnum piece;
-    bool occupied = false;
+    pieceTypeEnum piece = EMPTY;
+    // bool occupied = false;
     colorEnum color = NONE;
     char boardChar = '*';
     validMove* move = nullptr;

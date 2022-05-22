@@ -22,61 +22,52 @@ int BOARD_HEIGHT = 10;
 
 void clearSpots(ChessBoardSpot** spots)
 {
-
+  for(int x = 0; x < 9; x++)
+  {
+    for(int y = 0; y < 8; y++)
+    {
+      spots[x][y].clear();
+    }
+  }
 }
 
 void defaultCoordinates(ChessBoardSpot** spots)
 {
-  // hard-code default coordinates for black pieces
-  // blackCoors[0] = {4, 0, 1};
-  // blackCoors[1] = {3, 0, 2};
-  // blackCoors[2] = {5, 0, 2};
-  // blackCoors[3] = {2, 0, 3};
-  // blackCoors[4] = {6, 0, 3};
-  // blackCoors[5] = {1, 0, 4};
-  // blackCoors[6] = {7, 0, 4};
-  // blackCoors[7] = {0, 0, 5};
-  // blackCoors[8] = {8, 0, 5};
-
-  // blackCoors[9] = {1, 2, 6};
-  // blackCoors[10] = {7, 2, 6};
-  // blackCoors[11] = {0, 3, 7};
-  // blackCoors[12] = {2, 3, 7};
-  // blackCoors[13] = {4, 3, 7};
-  // blackCoors[14] = {6, 3, 7};
-  // blackCoors[15] = {8, 3, 7};
-
-
   // Note that the x and y coordinates are swapped for the spots array; spots[y][x]
-  spots[0][4].setData(GENERAL, true, BLACK, 'G', new generalMove());
-  spots[0][3].setData(ADVISOR, true, BLACK, 'A', new advisorMove());
-  spots[0][5].setData(ADVISOR, true, BLACK, 'A', new advisorMove());
-  spots[0][2].setData(ELEPHANT, true, BLACK, 'E', new elephantMove());
-  spots[0][6].setData(ELEPHANT, true, BLACK, 'E', new elephantMove());
-  spots[0][1].setData(HORSE, true, BLACK, 'H', new horseMove());
-  spots[0][7].setData(HORSE, true, BLACK, 'H', new horseMove());
-  spots[0][0].setData(CHARIOT, true, BLACK, 'C', new chariotMove());
-  spots[0][8].setData(CHARIOT, true, BLACK, 'C', new chariotMove());
-  spots[2][1].setData(CANNON, true, BLACK, 'P', new powMove());
-  spots[2][7].setData(CANNON, true, BLACK, 'P', new powMove());
+
+  // Black pieces
+  spots[0][4].setData(GENERAL, BLACK, 'G', new generalMove());
+  spots[0][3].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  spots[0][5].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  spots[0][2].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  spots[0][6].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  spots[0][1].setData(HORSE, BLACK, 'H', new horseMove());
+  spots[0][7].setData(HORSE, BLACK, 'H', new horseMove());
+  spots[0][0].setData(CHARIOT, BLACK, 'C', new chariotMove());
+  spots[0][8].setData(CHARIOT, BLACK, 'C', new chariotMove());
+  spots[2][1].setData(CANNON, BLACK, 'P', new powMove());
+  spots[2][7].setData(CANNON, BLACK, 'P', new powMove());
   for(int x = 0; x < 9; x += 2)
   {
-    spots[3][x].setData(SOLDIER, true, BLACK, 'S', new soldierMove());
+    spots[3][x].setData(SOLDIER, BLACK, 'S', new soldierMove());
   }
-}
 
-void updateChars(int status, ChessBoardSpot** spots)
-{
-  if(status == 1)
-    defaultCoordinates(spots);
-
-  // for(int a = 0; a < 16; a++)
-  // {
-  //   int pieceNum = blackCoors[a][2];
-  //   int xC = blackCoors[a][0], yC = blackCoors[a][1];
-  //
-  //   boardChars[yC][xC] = pieceNum + 48;
-  // }
+  // Red pieces
+  spots[9][4].setData(GENERAL, RED, 'G', new generalMove());
+  spots[9][3].setData(ADVISOR, RED, 'A', new advisorMove());
+  spots[9][5].setData(ADVISOR, RED, 'A', new advisorMove());
+  spots[9][2].setData(ELEPHANT, RED, 'E', new elephantMove());
+  spots[9][6].setData(ELEPHANT, RED, 'E', new elephantMove());
+  spots[9][1].setData(HORSE, RED, 'H', new horseMove());
+  spots[9][7].setData(HORSE, RED, 'H', new horseMove());
+  spots[9][0].setData(CHARIOT, RED, 'C', new chariotMove());
+  spots[9][8].setData(CHARIOT, RED, 'C', new chariotMove());
+  spots[7][1].setData(CANNON, RED, 'P', new powMove());
+  spots[7][7].setData(CANNON, RED, 'P', new powMove());
+  for(int x = 0; x < 9; x += 2)
+  {
+    spots[6][x].setData(SOLDIER, RED, 'S', new soldierMove());
+  }
 }
 
 void clearScreen()
