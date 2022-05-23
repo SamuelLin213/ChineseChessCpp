@@ -9,14 +9,20 @@
 #include <algorithm>
 #include <cctype>
 
+#define RESET   "\033[0m"
+#define BLACK_C  "\033[36m" // Changed black coloring to cyan for more visibility
+#define RED_C     "\033[31m" // Red coloring
+#define MAGENTA "\033[35m" // for numbers on side of board
+
 enum pieceTypeEnum {
   GENERAL,
-  GUARD,
+  ADVISOR,
   ELEPHANT,
   HORSE,
   CHARIOT,
   CANNON,
-  SOLDIER
+  SOLDIER,
+  EMPTY
 };
 
 enum colorEnum {
@@ -24,9 +30,5 @@ enum colorEnum {
   BLACK,
   NONE
 };
-
-// extern colorEnum color;
-// extern colorEnum pieceColor;
-// extern pieceTypeEnum pieceType;
 
 #endif

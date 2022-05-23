@@ -1,5 +1,4 @@
 #include "enums.h"
-#include "chessBoard.h"
 #include "game.h"
 using namespace std;
 
@@ -34,7 +33,7 @@ int main()
       }
       case 2: // Choice to continue saved game
       {
-        loadGame();
+        // loadGame();
 
         choice = playGame(2);
         break;
