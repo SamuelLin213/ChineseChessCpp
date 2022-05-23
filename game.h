@@ -208,7 +208,7 @@ int playGame(int status)
       {
         spots[targetLocation[1]][targetLocation[0]] = spots[chosenPiece[1]][chosenPiece[0]];
         spots[chosenPiece[1]][chosenPiece[0]].clear();
-        spotOccupied[targetLocation[1]][targetLocation[0] = true;
+        spotOccupied[targetLocation[1]][targetLocation[0]] = true;
         spotOccupied[chosenPiece[1]][chosenPiece[0]] = false;
       }
       else{
@@ -244,56 +244,56 @@ void loadGame(ChessBoardSpot** spots)
   {
     for(int y = 0; y < 2; y++)
     {
-      inData >> blacktargetLocation[x][y];
+      inData >> blackCoors[x][y];
     }
   }
   for(int x = 0; x < 16; x++)
   {
     for(int y = 0; y < 2; y++)
     {
-      inData >> redtargetLocation[x][y];
+      inData >> redCoors[x][y];
     }
   }
 
   // Creating black pieces
-  spots[blacktargetLocation[0][0]][blacktargetLocation[0][1]].setData(GENERAL, BLACK, 'G', new generalMove());
-  spots[blacktargetLocation[1][0]][blacktargetLocation[1][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
-  spots[blacktargetLocation[2][0]][blacktargetLocation[2][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
-  spots[blacktargetLocation[3][0]][blacktargetLocation[3][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
-  spots[blacktargetLocation[4][0]][blacktargetLocation[4][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
-  spots[blacktargetLocation[5][0]][blacktargetLocation[5][1]].setData(HORSE,  BLACK, 'H', new horseMove());
-  spots[blacktargetLocation[6][0]][blacktargetLocation[6][1]].setData(HORSE,  BLACK, 'H', new horseMove());
-  spots[blacktargetLocation[7][0]][blacktargetLocation[7][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
-  spots[blacktargetLocation[8][0]][blacktargetLocation[8][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
-  spots[blacktargetLocation[9][0]][blacktargetLocation[9][1]].setData(CANNON,  BLACK, 'P', new powMove());
-  spots[blacktargetLocation[10][0]][blacktargetLocation[10][1]].setData(CANNON,  BLACK, 'P', new powMove());
-  spots[blacktargetLocation[11][0]][blacktargetLocation[11][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  spots[blacktargetLocation[12][0]][blacktargetLocation[12][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  spots[blacktargetLocation[13][0]][blacktargetLocation[13][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  spots[blacktargetLocation[14][0]][blacktargetLocation[14][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  spots[blacktargetLocation[15][0]][blacktargetLocation[15][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  kingCoor[0] = blacktargetLocation[0][1];
-  kingCoor[1] = blacktargetLocation[0][0];
+  spots[blackCoors[0][0]][blackCoors[0][1]].setData(GENERAL, BLACK, 'G', new generalMove());
+  spots[blackCoors[1][0]][blackCoors[1][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  spots[blackCoors[2][0]][blackCoors[2][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  spots[blackCoors[3][0]][blackCoors[3][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  spots[blackCoors[4][0]][blackCoors[4][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  spots[blackCoors[5][0]][blackCoors[5][1]].setData(HORSE,  BLACK, 'H', new horseMove());
+  spots[blackCoors[6][0]][blackCoors[6][1]].setData(HORSE,  BLACK, 'H', new horseMove());
+  spots[blackCoors[7][0]][blackCoors[7][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
+  spots[blackCoors[8][0]][blackCoors[8][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
+  spots[blackCoors[9][0]][blackCoors[9][1]].setData(CANNON,  BLACK, 'P', new powMove());
+  spots[blackCoors[10][0]][blackCoors[10][1]].setData(CANNON,  BLACK, 'P', new powMove());
+  spots[blackCoors[11][0]][blackCoors[11][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  spots[blackCoors[12][0]][blackCoors[12][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  spots[blackCoors[13][0]][blackCoors[13][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  spots[blackCoors[14][0]][blackCoors[14][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  spots[blackCoors[15][0]][blackCoors[15][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  kingCoor[0] = blackCoors[0][1];
+  kingCoor[1] = blackCoors[0][0];
 
   // Creating red pieces
-  spots[redtargetLocation[0][0]][redtargetLocation[0][1]].setData(GENERAL,  RED, 'G', new generalMove());
-  spots[redtargetLocation[1][0]][redtargetLocation[1][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
-  spots[redtargetLocation[2][0]][redtargetLocation[2][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
-  spots[redtargetLocation[3][0]][redtargetLocation[3][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
-  spots[redtargetLocation[4][0]][redtargetLocation[4][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
-  spots[redtargetLocation[5][0]][redtargetLocation[5][1]].setData(HORSE,  RED, 'H', new horseMove());
-  spots[redtargetLocation[6][0]][redtargetLocation[6][1]].setData(HORSE,  RED, 'H', new horseMove());
-  spots[redtargetLocation[7][0]][redtargetLocation[7][1]].setData(CHARIOT,  RED, 'C', new chariotMove());
-  spots[redtargetLocation[8][0]][redtargetLocation[8][1]].setData(CHARIOT,  RED, 'C', new chariotMove());
-  spots[redtargetLocation[9][0]][redtargetLocation[9][1]].setData(CANNON,  RED, 'P', new powMove());
-  spots[redtargetLocation[10][0]][redtargetLocation[10][1]].setData(CANNON,  RED, 'P', new powMove());
-  spots[redtargetLocation[11][0]][redtargetLocation[11][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
-  spots[redtargetLocation[12][0]][redtargetLocation[12][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
-  spots[redtargetLocation[13][0]][redtargetLocation[13][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
-  spots[redtargetLocation[14][0]][redtargetLocation[14][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
-  spots[redtargetLocation[15][0]][redtargetLocation[15][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
-  kingCoor[0] = redtargetLocation[0][1];
-  kingCoor[1] = redtargetLocation[0][0];
+  spots[redCoors[0][0]][redCoors[0][1]].setData(GENERAL,  RED, 'G', new generalMove());
+  spots[redCoors[1][0]][redCoors[1][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
+  spots[redCoors[2][0]][redCoors[2][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
+  spots[redCoors[3][0]][redCoors[3][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
+  spots[redCoors[4][0]][redCoors[4][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
+  spots[redCoors[5][0]][redCoors[5][1]].setData(HORSE,  RED, 'H', new horseMove());
+  spots[redCoors[6][0]][redCoors[6][1]].setData(HORSE,  RED, 'H', new horseMove());
+  spots[redCoors[7][0]][redCoors[7][1]].setData(CHARIOT,  RED, 'C', new chariotMove());
+  spots[redCoors[8][0]][redCoors[8][1]].setData(CHARIOT,  RED, 'C', new chariotMove());
+  spots[redCoors[9][0]][redCoors[9][1]].setData(CANNON,  RED, 'P', new powMove());
+  spots[redCoors[10][0]][redCoors[10][1]].setData(CANNON,  RED, 'P', new powMove());
+  spots[redCoors[11][0]][redCoors[11][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  spots[redCoors[12][0]][redCoors[12][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  spots[redCoors[13][0]][redCoors[13][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  spots[redCoors[14][0]][redCoors[14][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  spots[redCoors[15][0]][redCoors[15][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  kingCoor[0] = redCoors[0][1];
+  kingCoor[1] = redCoors[0][0];
 
   for(int x = 0; x < 10; x++)
   {
@@ -318,9 +318,9 @@ void saveGame(ChessBoardSpot** spots)
   // {
   //   for(int y = 0; y < 2; y++)
   //   {
-  //     outData << blacktargetLocation[x][y] << " ";
+  //     outData << blackCoors[x][y] << " ";
   //   }
-  //   outData << blacktargetLocation[x][2] << endl;
+  //   outData << blackCoors[x][2] << endl;
   // }
 }
 
