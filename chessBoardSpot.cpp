@@ -59,7 +59,7 @@ void ChessBoardSpot::setMove(validMove* move_)
 {
   this->move = move_;
 }
-bool ChessBoardSpot::movePiece()
+validMove* ChessBoardSpot::getMove()
 {
   return this->move;
 }
@@ -75,6 +75,16 @@ void ChessBoardSpot::clear()
   this->color = NONE;
   this->boardChar = '*';
   this->move = nullptr;
+}
+
+void ChessBoardSpot::cpy(ChessBoardSpot cpy)
+{
+  this->clear();
+
+  this->piece = cpy.piece;
+  this->color = cpy.color;
+  this->boardChar = cpy.boardChar;
+  this->move = cpy.move;
 }
 
 string ChessBoardSpot::getPieceStr()

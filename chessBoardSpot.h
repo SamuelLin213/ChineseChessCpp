@@ -8,6 +8,8 @@
 
 using namespace std;
 
+class validMove;
+
 class ChessBoardSpot{
   public:
     ChessBoardSpot() {};
@@ -30,9 +32,10 @@ class ChessBoardSpot{
     void setChar(char char_);
 
     void setMove(validMove* move_);
-    bool movePiece();
+    validMove* getMove();
 
     void clear();
+    void cpy(ChessBoardSpot cpy);
 
     ~ChessBoardSpot();
   private:

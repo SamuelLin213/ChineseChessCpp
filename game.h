@@ -144,7 +144,7 @@ int playGame(int status)
 
     if(tolower(confirm) == 'y')
     {
-      cout << "Enter the new coordinates(x y), with a space in between, or 0 to quit: ";
+      NEWCOOR:cout << "Enter the new coordinates(x y), with a space in between, or 0 to quit: ";
       cin >> coors[0];
 
       if(coors[0] == 0)
@@ -182,6 +182,39 @@ int playGame(int status)
       }
       coors[0] -= 1;
       coors[1] -= 1;
+
+      temp = spots[coors[1]][coors[0]];
+
+      if(redTurn && temp.getColor() == RED)
+      {
+        cout << "Error: wrong target color! Please select a black piece to capture.";
+        cin.ignore();
+        cin.get();
+
+        goto NEWCOOR;
+      }
+      else if(!redTurn && temp.getColor() == BLACK)
+      {
+        cout << "Error: wrong target color! Please select a red piece to capture.";
+        cin.ignore();
+        cin.get();
+
+        goto NEWCOOR;
+      }
+
+      spots[coorsO[1]][coorsO[0]].getMove()->setCoors(coorsO[0], coorsO[1], coors[0], coors[1]);
+      if(spots[coorsO[1]][coorsO[0]].getMove()->move(spotOccupied, spots[coorsO[1]][coorsO[0]].getColor(), kingCoor))
+      {
+        spots[coors[1]][coors[0]] = spots[coorsO[1]][coorsO[0]];
+        spots[coorsO[1]][coorsO[0]].clear();
+      }
+      else{
+        cout << "Invalid move! Please try again.";
+        cin.ignore();
+        cin.get();
+
+        goto AGAIN;
+      }
 
       // Check target spot is empty
 
@@ -236,6 +269,8 @@ void loadGame(ChessBoardSpot** spots)
   spots[blackCoors[13][0]][blackCoors[13][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
   spots[blackCoors[14][0]][blackCoors[14][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
   spots[blackCoors[15][0]][blackCoors[15][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  kingCoor[0] = blackCoors[0][1];
+  kingCoor[1] = blackCoors[0][0];
 
   // Creating red pieces
   spots[redCoors[0][0]][redCoors[0][1]].setData(GENERAL,  RED, 'G', new generalMove());
@@ -254,6 +289,19 @@ void loadGame(ChessBoardSpot** spots)
   spots[redCoors[13][0]][redCoors[13][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
   spots[redCoors[14][0]][redCoors[14][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
   spots[redCoors[15][0]][redCoors[15][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  kingCoor[0] = redCoors[0][1];
+  kingCoor[1] = redCoors[0][0];
+
+  for(int x = 0; x < 10; x++)
+  {
+    for(int y = 0; y < 9; y++)
+    {
+      if(spots[x][y].getPiece() == EMPTY)
+        spotOccupied[x][y] = false;
+      else
+        spotOccupied[x][y] = true;
+    }
+  }
 
   inData.close();
 }

@@ -16,6 +16,11 @@ int PIECE_TOTAL = 16; // constant for total pieces per team
 int BOARD_WIDTH = 9;
 int BOARD_HEIGHT = 10;
 
+// Stores coordinates of two generals(kings), in the following format:
+//  {blackKingX, blackKingY, redKingX, redKingY}
+vector<int> kingCoor(4);
+bool spotOccupied[10][9]; // Stores status of each spot on board
+
 // Vectors of coordinates, for input/output to textfile
 // vector<vector<int>> redCoors(16, vector<int>(3, 0));
 // vector<vector<int>> blackCoors(16, vector<int>(3, 0));
@@ -51,6 +56,8 @@ void defaultCoordinates(ChessBoardSpot** spots)
   {
     spots[3][x].setData(SOLDIER, BLACK, 'S', new soldierMove());
   }
+  kingCoor[0] = 4;
+  kingCoor[1] = 0;
 
   // Red pieces
   spots[9][4].setData(GENERAL, RED, 'G', new generalMove());
@@ -67,6 +74,19 @@ void defaultCoordinates(ChessBoardSpot** spots)
   for(int x = 0; x < 9; x += 2)
   {
     spots[6][x].setData(SOLDIER, RED, 'S', new soldierMove());
+  }
+  kingCoor[2] = 4;
+  kingCoor[3] = 9;
+
+  for(int x = 0; x < 10; x++)
+  {
+    for(int y = 0; y < 9; y++)
+    {
+      if(spots[x][y].getPiece() == EMPTY)
+        spotOccupied[x][y] = false;
+      else
+        spotOccupied[x][y] = true;
+    }
   }
 }
 
