@@ -77,7 +77,7 @@ public:
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
 };
 
-class soldierMove: public validMove {
+class soldierMove: public validMove{
 public:
   soldierMove() {}
   soldierMove(int x, int y) {}
