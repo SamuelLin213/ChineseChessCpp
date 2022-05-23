@@ -208,6 +208,8 @@ int playGame(int status)
       {
         spots[targetLocation[1]][targetLocation[0]] = spots[chosenPiece[1]][chosenPiece[0]];
         spots[chosenPiece[1]][chosenPiece[0]].clear();
+        spotOccupied[targetLocation[1]][targetLocation[0] = true;
+        spotOccupied[chosenPiece[1]][chosenPiece[0]] = false;
       }
       else{
         cout << "Invalid move! Please try again.";
