@@ -84,17 +84,27 @@ public:
   ~soldierMove() {}
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
     vector<vector<int>> possible;
+
     if( (color == RED && currY < 6) || (color == BLACK && currY > 5))
     {
-      vector<int> temp1 = {currX, currY+ 1};
+
+      vector<int> temp1;
+      if(color == RED)
+      {
+        temp1 = {currX, currY - 1};
+      }
+      else if(color == BLACK)
+      {
+        temp1  = {currX, currY + 1};
+      }
       vector<int> temp2 = {currX - 1, currY};
       vector<int> temp3 = {currX + 1, currY};
       vector<int> temp4 = {newX, newY};
 
-      cout << endl << temp1[0] << " " << temp1[1] << endl;
-      cout << temp2[0] << " " << temp2[1] << endl;
-      cout << temp3[0] << " " << temp3[1] << endl;
-      cout << temp4[0] << " " << temp4[1] << endl << endl;
+      // cout << endl << temp1[0] << " " << temp1[1] << endl;
+      // cout << temp2[0] << " " << temp2[1] << endl;
+      // cout << temp3[0] << " " << temp3[1] << endl;
+      // cout << temp4[0] << " " << temp4[1] << endl << endl;
 
       possible.push_back(temp1);
       possible.push_back(temp2);
@@ -109,10 +119,14 @@ public:
     else {
       cout << "new: " << newX << " " << newY << endl;
       cout << "old: " << currX << " " << currY << endl;
-      if(newX != currX || abs(newY - currY) != 1)
+      if(newX != currX)
       {
         return false;
       }
+      if(color == RED && newY != currY - 1)
+        return false;
+      if(color == BLACK && newY != currY + 1)
+        return false;
       return true;
     }
     // return true;

@@ -206,7 +206,9 @@ int playGame(int status)
       spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]);
       if(spots[chosenPiece[1]][chosenPiece[0]].getMove()->move(spotOccupied, spots[chosenPiece[1]][chosenPiece[0]].getColor(), kingCoor))
       {
-        spots[targetLocation[1]][targetLocation[0]] = spots[chosenPiece[1]][chosenPiece[0]];
+        ChessBoardSpot tempSpot = spots[chosenPiece[1]][chosenPiece[0]];
+        spots[targetLocation[1]][targetLocation[0]].clear();
+        spots[targetLocation[1]][targetLocation[0]] = tempSpot;
         spots[chosenPiece[1]][chosenPiece[0]].clear();
         spotOccupied[targetLocation[1]][targetLocation[0]] = true;
         spotOccupied[chosenPiece[1]][chosenPiece[0]] = false;
@@ -224,6 +226,8 @@ int playGame(int status)
       redTurn = !redTurn; // inverses so that it's the other player's turn
     }
     else{
+
+
       goto AGAIN;
     }
 
