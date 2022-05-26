@@ -8,7 +8,8 @@ using namespace std;
 class ChessBoardSpot;
 
 // strategy class, other classes just need to inherit from this
-class validMove{
+class validMove
+{
   public:
     validMove() {}
     validMove(int x, int y) {}
@@ -29,15 +30,55 @@ class validMove{
 };
 
 // other pieces inherit from validMove
-class generalMove: public validMove {
+class generalMove: public validMove 
+{
 public:
   generalMove() {}
   generalMove(int x, int y) {}
   ~generalMove() {}
-  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
+  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) 
+  {
+      vector<vector<int> > possible;
+      ChessBoardSpot** spots = new ChessBoardSpot*[BOARD_HEIGHT];
+      ChessBoardSpot temp = spots[currX][currY];
+
+      if(temp.getColor() != spots[currX][currY-1].getColor())
+      {
+          vector<int> ValidMove1 { currX, currY-1};
+          possible.push_back(ValidMove1);
+      }
+      else if(temp.getColor() != spots[currX][currY+1].getColor())
+      {
+          vector<int> ValidMove2 { currX, currY+1};
+          possible.push_back(ValidMove2);
+      }
+      else if(temp.getColor() != spots[currX-1][currY].getColor())
+      {
+          vector<int> ValidMove3 { currX-1, currY};
+          possible.push_back(ValidMove3);
+      }
+      else if(temp.getColor() != spots[currX+1][currY].getColor())
+      {
+          vector<int> ValidMove4 { currX+1, currY};
+          possible.push_back(ValidMove4);
+
+      }
+
+      vector<int> newLocation {newX, newY};
+
+      if(find(possible.begin(), possible.end(), newLocation) != possible.end()) // we search through the fector possible
+      {
+        return true;
+      }
+      return false;
+
+      
+      
+  }
 };
 
-class advisorMove: public validMove {
+class advisorMove: public validMove 
+{
 public:
   advisorMove() {}
   advisorMove(int x, int y) {}
@@ -45,7 +86,8 @@ public:
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
 };
 
-class elephantMove: public validMove {
+class elephantMove: public validMove 
+{
 public:
   elephantMove() {}
   elephantMove(int x, int y) {}
@@ -53,7 +95,8 @@ public:
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
 };
 
-class horseMove: public validMove {
+class horseMove: public validMove 
+{
 public:
   horseMove() {}
   horseMove(int x, int y) {}
@@ -61,7 +104,8 @@ public:
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
 };
 
-class chariotMove: public validMove {
+class chariotMove: public validMove 
+{
 public:
   chariotMove() {}
   chariotMove(int x, int y) {}
@@ -69,7 +113,8 @@ public:
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
 };
 
-class powMove: public validMove {
+class powMove: public validMove 
+{
 public:
   powMove() {}
   powMove(int x, int y) {}
@@ -77,29 +122,31 @@ public:
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
 };
 
-class soldierMove: public validMove{
+class soldierMove: public validMove
+{
 public:
   soldierMove() {}
   soldierMove(int x, int y) {}
   ~soldierMove() {}
-  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
-    vector<vector<int>> possible;
+  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) 
+  {
+    vector<vector<int> > possible;
 
     if( (color == RED && currY < 6) || (color == BLACK && currY > 5))
     {
 
       vector<int> temp1;
-      if(color == RED)
+      if(color == RED) // only valid move is do move down
       {
-        temp1 = {currX, currY - 1};
+        temp1 = { currX, currY - 1};
       }
-      else if(color == BLACK)
+      else if(color == BLACK) // only valid move is to move up
       {
-        temp1  = {currX, currY + 1};
+        temp1 = {currX, currY + 1};
       }
-      vector<int> temp2 = {currX - 1, currY};
-      vector<int> temp3 = {currX + 1, currY};
-      vector<int> temp4 = {newX, newY};
+      vector<int> temp2 {currX - 1, currY};
+      vector<int> temp3 {currX + 1, currY};
+      vector<int> temp4 {newX, newY};
 
       // cout << endl << temp1[0] << " " << temp1[1] << endl;
       // cout << temp2[0] << " " << temp2[1] << endl;
@@ -110,7 +157,7 @@ public:
       possible.push_back(temp2);
       possible.push_back(temp3);
 
-      if(find(possible.begin(), possible.end(), temp4) != possible.end())
+      if(find(possible.begin(), possible.end(), temp4) != possible.end()) // we search through the fector possible
       {
         return true;
       }

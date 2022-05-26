@@ -12,7 +12,8 @@ bool redTurn = true;
 
 void loadGame(ChessBoardSpot** spots);
 
-void printIndex() {
+void printIndex() 
+{
   cout << "PIECE INDEX: " << endl;
   cout << setw(42) << setfill('-') << "" << endl;
   cout << setfill(' ') << left << setw(20) << "| G - General" << "| " << setw(19) << "A - Advisor" << "|" << endl;
@@ -44,11 +45,11 @@ int playGame(int status)
 
   bool done = false; // when checkmate or end of game(quit/save)
   string pieceChoice;
-  int targetLocation[2]; // new coordinates
-  int chosenPiece[2]; // original coordintes
+  int targetLocation[2]; // Cordiante of location you want to move piece 
+  int chosenPiece[2]; // Cordinates of pieces you want to move
   char confirm;
 
-  ChessBoardSpot** spots = new ChessBoardSpot*[BOARD_HEIGHT];
+  ChessBoardSpot** spots = new ChessBoardSpot*[BOARD_HEIGHT]; // Spots --> ______ --> ______ 
 
   // don't need this manual pushing of names anymore -- use name inside spot
   // pieces.push_back("general");
@@ -61,11 +62,11 @@ int playGame(int status)
 
   initializeSpots(spots);
 
-  if(status == 1)
+  if(status == 1) // 1 means users wants to start a new game 
   {
     defaultCoordinates(spots);
   }
-  else if(status == 2)
+  else if(status == 2) // 2 means the user wants to load a game  
   {
     loadGame(spots);
   }
@@ -81,25 +82,29 @@ int playGame(int status)
     cout << "CURRENT TURN: ";
     if(redTurn)
       cout << "RED";
+    
     else
       cout << "BLACK";
+    
     cout << endl << endl;
 
     printBoard(status, spots);
 
     cout << "Enter the coordinates of the piece to select, or enter 0 to quit: ";
-    cin >> chosenPiece[0];
+    cin >> chosenPiece[0]; // get X cordinate for piece you want to move 
 
     if(chosenPiece[0] == 0)
     {
       return 3;
     }
-    cin >> chosenPiece[1];
+                                      
+    cin >> chosenPiece[1]; // get Y cordinate for piece you want to move 
 
     if(chosenPiece[1] == 0)
     {
       return 3;
     }
+
     if(chosenPiece[0] < 0 || chosenPiece[0] > BOARD_WIDTH || chosenPiece[1] < 0 || chosenPiece[1] > BOARD_HEIGHT)
     {
       cout << "Invalid coordinates! Please try again.";
@@ -108,6 +113,7 @@ int playGame(int status)
 
       goto AGAIN;
     }
+    
     chosenPiece[0] -= 1;
     chosenPiece[1] -= 1;
 
@@ -122,6 +128,7 @@ int playGame(int status)
 
       goto AGAIN;
     }
+
     if(redTurn && temp.getColor() != RED)
     {
       cout << "Error: wrong color selected! Please select a red piece.";
@@ -183,7 +190,7 @@ int playGame(int status)
       targetLocation[0] -= 1;
       targetLocation[1] -= 1;
 
-      temp = spots[targetLocation[1]][targetLocation[0]];
+      temp = spots[targetLocation[1]][targetLocation[0]]; // 
 
       if(redTurn && temp.getColor() == RED)
       {
@@ -202,16 +209,17 @@ int playGame(int status)
         goto NEWCOOR;
       }
 
-      //coorsO - original coordinates, coors - new coordinates
-      spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]);
+      //chosenPiece - original coordinates, targetLocation - new coordinates
+    
+      spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]); // get the move of piece are looking, at Set Coors
       if(spots[chosenPiece[1]][chosenPiece[0]].getMove()->move(spotOccupied, spots[chosenPiece[1]][chosenPiece[0]].getColor(), kingCoor))
       {
-        ChessBoardSpot tempSpot = spots[chosenPiece[1]][chosenPiece[0]];
-        spots[targetLocation[1]][targetLocation[0]].clear();
-        spots[targetLocation[1]][targetLocation[0]] = tempSpot;
-        spots[chosenPiece[1]][chosenPiece[0]].clear();
-        spotOccupied[targetLocation[1]][targetLocation[0]] = true;
-        spotOccupied[chosenPiece[1]][chosenPiece[0]] = false;
+          ChessBoardSpot tempSpot = spots[chosenPiece[1]][chosenPiece[0]]; // copy the piece we are going to move
+          spots[targetLocation[1]][targetLocation[0]].clear();  // clear the spot we want to move piece to
+          spots[targetLocation[1]][targetLocation[0]] = tempSpot; // move the piece to target location
+          spots[chosenPiece[1]][chosenPiece[0]].clear(); // clear previous location of piece
+          spotOccupied[targetLocation[1]][targetLocation[0]] = true; 
+          spotOccupied[chosenPiece[1]][chosenPiece[0]] = false;
       }
       else{
         cout << "Invalid move! Please try again.";
@@ -238,8 +246,8 @@ int playGame(int status)
 
 void loadGame(ChessBoardSpot** spots)
 {
-  vector<vector<int>> blackCoors(16, vector<int>(2, 0));
-  vector<vector<int>> redCoors(16, vector<int>(2, 0));
+  vector<vector<int> > blackCoors(16, vector<int>(2, 0));
+  vector<vector<int> > redCoors(16, vector<int>(2, 0));
 
   ifstream inData;
   inData.open("coordinates.txt");
