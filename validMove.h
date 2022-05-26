@@ -138,11 +138,15 @@ public:
       vector<int> temp1;
       if(color == RED) // only valid move is do move down
       {
-        temp1 = { currX, currY - 1};
+        temp1.push_back(currX);
+        temp1.push_back(currY - 1);
+        //temp1 = { currX, currY - 1};
       }
       else if(color == BLACK) // only valid move is to move up
       {
-        temp1 = {currX, currY + 1};
+        temp1.push_back(currX);
+        temp1.push_back(currY + 1);
+        //temp1 = {currX, currY + 1};
       }
       vector<int> temp2 {currX - 1, currY};
       vector<int> temp3 {currX + 1, currY};
