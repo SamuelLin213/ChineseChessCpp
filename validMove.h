@@ -42,22 +42,22 @@ public:
       ChessBoardSpot** spots = new ChessBoardSpot*[BOARD_HEIGHT];
       ChessBoardSpot temp = spots[currX][currY];
 
-      if(temp.getColor() != spots[currX][currY-1].getColor())
+      if((temp.getColor() != spots[currX][currY-1].getColor()) || spotOccupied[currX][currY-1])
       {
           vector<int> ValidMove1 { currX, currY-1};
           possible.push_back(ValidMove1);
       }
-      else if(temp.getColor() != spots[currX][currY+1].getColor())
+      else if((temp.getColor() != spots[currX][currY+1].getColor()) || spotOccupied[currX][currY+1])
       {
           vector<int> ValidMove2 { currX, currY+1};
           possible.push_back(ValidMove2);
       }
-      else if(temp.getColor() != spots[currX-1][currY].getColor())
+      else if((temp.getColor() != spots[currX-1][currY].getColor()) || spotOccupied[currX-1][currY])
       {
           vector<int> ValidMove3 { currX-1, currY};
           possible.push_back(ValidMove3);
       }
-      else if(temp.getColor() != spots[currX+1][currY].getColor())
+      else if((temp.getColor() != spots[currX+1][currY].getColor())|| spotOccupied[currX+1][currY])
       {
           vector<int> ValidMove4 { currX+1, currY};
           possible.push_back(ValidMove4);
