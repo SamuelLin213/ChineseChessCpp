@@ -144,6 +144,7 @@ int playGame(int status)
 
     if(tolower(confirm) == 'y')
     {
+
       NEWCOOR:cout << "Enter the new coordinates(x y), with a space in between, or 0 to quit: ";
       cin >> targetLocation[0];
 
@@ -222,7 +223,6 @@ int playGame(int status)
       }
 
       // Check target spot is empty
-
       redTurn = !redTurn; // inverses so that it's the other player's turn
     }
     else{
