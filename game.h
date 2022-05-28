@@ -112,7 +112,7 @@ int playGame(int status)
     chosenPiece[1] -= 1;
 
     //ChessBoardSpot temp = spots[0][0];
-    ChessBoardSpot temp = spots[chosenPiece[1]][chosenPiece[0]];
+    ChessBoardSpot temp(spots[chosenPiece[1]][chosenPiece[0]]);
 
     if(temp.getPiece() == EMPTY)
     {
@@ -206,9 +206,9 @@ int playGame(int status)
       spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]);
       if(spots[chosenPiece[1]][chosenPiece[0]].getMove()->move(spotOccupied, spots[chosenPiece[1]][chosenPiece[0]].getColor(), kingCoor))
       {
-        ChessBoardSpot tempSpot = spots[chosenPiece[1]][chosenPiece[0]];
-        spots[targetLocation[1]][targetLocation[0]].clear();
-        spots[targetLocation[1]][targetLocation[0]] = tempSpot;
+        //ChessBoardSpot tempSpot(spots[chosenPiece[1]][chosenPiece[0]]);
+        //spots[targetLocation[1]][targetLocation[0]].clear();
+        spots[targetLocation[1]][targetLocation[0]].cpy(spots[chosenPiece[1]][chosenPiece[0]]);
         spots[chosenPiece[1]][chosenPiece[0]].clear();
         spotOccupied[targetLocation[1]][targetLocation[0]] = true;
         spotOccupied[chosenPiece[1]][chosenPiece[0]] = false;

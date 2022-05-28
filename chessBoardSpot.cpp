@@ -8,36 +8,25 @@ ChessBoardSpot::ChessBoardSpot(pieceTypeEnum piece_, colorEnum color_, char boar
 {
 }
 
+ChessBoardSpot::ChessBoardSpot()
+{
+  move = new validMove();
+  move = nullptr;
+  piece = EMPTY;
+  color = NONE;
+  boardChar = '*';
+}
+
 void ChessBoardSpot::setColor(colorEnum color_)
 {
-  // transform(color_.begin(), color_.end(), color_.begin(),
-  //   [](unsigned char c){ return std::tolower(c); });
-  //
-  // if(color_ == "black")
-  // {
-  //   this->color = BLACK;
-  // }
-  // else if(color_ == "red")
-  // {
-  //   this->color = RED;
-  // }
   this->color = color_;
 }
-colorEnum ChessBoardSpot::getColor()
+colorEnum ChessBoardSpot::getColor() const
 {
-  // return this->color;
   return this->color;
 }
-// void ChessBoardSpot::setOccupied(bool occupied_)
-// {
-//   this->occupied = occupied_;
-// }
-// bool ChessBoardSpot::getOccupied()
-// {
-//   return this->occupied;
-// }
 
-pieceTypeEnum ChessBoardSpot::getPiece()
+pieceTypeEnum ChessBoardSpot::getPiece() const
 {
   return this->piece;
 }
@@ -46,7 +35,7 @@ void ChessBoardSpot::setPiece(pieceTypeEnum piece_)
   this->piece = piece_;
 }
 
-char ChessBoardSpot::getChar()
+char ChessBoardSpot::getChar() const
 {
   return this->boardChar;
 }
@@ -59,7 +48,7 @@ void ChessBoardSpot::setMove(validMove* move_)
 {
   this->move = move_;
 }
-validMove* ChessBoardSpot::getMove()
+validMove* ChessBoardSpot::getMove() const
 {
   return this->move;
 }
@@ -77,14 +66,17 @@ void ChessBoardSpot::clear()
   this->move = nullptr;
 }
 
+// need to use this to copy over data; do NOT use = to copy objects
 void ChessBoardSpot::cpy(ChessBoardSpot cpy)
 {
   this->clear();
 
+  delete this->move;
+
   this->piece = cpy.piece;
   this->color = cpy.color;
   this->boardChar = cpy.boardChar;
-  this->move = cpy.move;
+  this->move = new validMove(*cpy.move);
 }
 
 string ChessBoardSpot::getPieceStr()
@@ -127,6 +119,17 @@ string ChessBoardSpot::getPieceStr()
       break;
     }
   }
+}
+
+ChessBoardSpot::ChessBoardSpot(const ChessBoardSpot &cpyObj)
+{
+  this->clear();
+  piece = cpyObj.getPiece();
+  color = cpyObj.getColor();
+  boardChar = cpyObj.getChar();
+  delete this->move;
+  //this->move->cpy(*cpyObj.getMove());
+  this->move = new validMove(*cpyObj.getMove());
 }
 
 void ChessBoardSpot::setData(pieceTypeEnum piece_, colorEnum color_,

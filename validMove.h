@@ -19,8 +19,9 @@ class validMove{
       currX = currX_;
       currY = currY_;
     }
+    virtual void cpy(const validMove& cpyObj) {};
     ~validMove() {}
-    virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) = 0;
+    virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; };
   protected:
     int newX;
     int newY;
@@ -80,6 +81,13 @@ public:
 class soldierMove: public validMove{
 public:
   soldierMove() {}
+  void cpy(const soldierMove& objCpy)
+  {
+    this->newX = objCpy.newY;
+    this->newY = objCpy.newY;
+    this->currY = objCpy.currY;
+    this->currX = objCpy.currX;
+  }
   soldierMove(int x, int y) {}
   ~soldierMove() {}
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {

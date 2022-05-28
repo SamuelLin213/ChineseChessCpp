@@ -12,27 +12,28 @@ class validMove;
 
 class ChessBoardSpot{
   public:
-    ChessBoardSpot() {};
+    ChessBoardSpot();
+    ChessBoardSpot(const ChessBoardSpot &cpyObj);
     ChessBoardSpot(pieceTypeEnum piece_, colorEnum color_, char boardChar_, validMove* move_);
 
     void setData(pieceTypeEnum piece_, colorEnum color_,
     char boardChar_, validMove* move_);
 
     void setColor(colorEnum color_);
-    colorEnum getColor();
+    colorEnum getColor() const;
 
     // void setOccupied(bool occupied_);
     // bool getOccupied();
 
-    pieceTypeEnum getPiece();
+    pieceTypeEnum getPiece() const;
     string getPieceStr();
     void setPiece(pieceTypeEnum piece_);
 
-    char getChar();
+    char getChar() const;
     void setChar(char char_);
 
     void setMove(validMove* move_);
-    validMove* getMove();
+    validMove* getMove() const;
 
     void clear();
     void cpy(ChessBoardSpot cpy);
