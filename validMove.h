@@ -237,7 +237,7 @@ public:
 
               if((currX-1 == newX && currY-2 == newY) || (currX+1 == newX && currY-2 == newY)) // Check if Left move 
               {
-                  if(spotOccupied[currX][currY-1] == false) // Check if Left Location is Empty 
+                  if(spotOccupied[currY-1][currX] == false) // Check if Left Location is Empty 
                   {
                     return true;
                   }
@@ -245,14 +245,14 @@ public:
               }
               else if((currX-1 == newX && currY+2 == newY) || (currX+1 == newX && currY+2 == newY))// Check if Right Move 
               {
-                  if(spotOccupied[currX][currY+1] == false) // Check if Right Location is Empty 
+                  if(spotOccupied[currY+1][currX] == false) // Check if Right Location is Empty 
                   {
                       return true;
                   }
               }
               else if((currX-2 == newX && currY-1 == newY) || (currX-2 == newX && currY+1 == newY)) // Chek if up Move
               {
-                  if(spotOccupied[currX-1][currY] == false) // Check if Up Location is Empty 
+                  if(spotOccupied[currY][currX-1] == false) // Check if Up Location is Empty 
                   {
                       return true;
                   }
@@ -260,7 +260,7 @@ public:
               
               else if((currX+2 == newX && currY-1 == newY) || (currX+2 == newX && currY+1 == newY)) // Check if Down Move
               { 
-                  if(spotOccupied[currX+1][currY] == false) // Check if Down Location is Empty 
+                  if(spotOccupied[currY][currX+1] == false) // Check if Down Location is Empty 
                   {
                       return true;
                   }
