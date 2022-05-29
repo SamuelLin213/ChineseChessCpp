@@ -166,20 +166,7 @@ int playGame(int status)
         cin.ignore();
         cin.get();
 
-        cout << "Enter the new coordinates(x y), with a space in between, or 0 to quit: ";
-        cin >> targetLocation[0];
-
-        if(targetLocation[0] == 0)
-        {
-          return 3;
-        }
-
-        cin >> targetLocation[1];
-
-        if(targetLocation[1] == 0)
-        {
-          return 3;
-        }
+        goto AGAIN;
       }
       targetLocation[0] -= 1;
       targetLocation[1] -= 1;
@@ -207,6 +194,7 @@ int playGame(int status)
       spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]);
       if(spots[chosenPiece[1]][chosenPiece[0]].getMove()->move(spotOccupied, spots[chosenPiece[1]][chosenPiece[0]].getColor(), kingCoor))
       {
+        cout << endl << "Works!" << endl;
         //ChessBoardSpot tempSpot(spots[chosenPiece[1]][chosenPiece[0]]);
         //spots[targetLocation[1]][targetLocation[0]].clear();
         spots[targetLocation[1]][targetLocation[0]].cpy(spots[chosenPiece[1]][chosenPiece[0]]);

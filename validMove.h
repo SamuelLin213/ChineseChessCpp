@@ -20,8 +20,15 @@ class validMove{
       currY = currY_;
     }
     virtual void cpy(const validMove& cpyObj) {};
+    validMove(const validMove& other)
+    {
+      this->newX = other.newX;
+      this->newY = other.newY;
+      this->currX = other.currY;
+      this->currY = other.currY;
+    }
     ~validMove() {}
-    virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; };
+    virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {};
   protected:
     int newX;
     int newY;
@@ -34,6 +41,13 @@ class generalMove: public validMove {
 public:
   generalMove() {}
   generalMove(int x, int y) {}
+  generalMove(const generalMove& other)
+  {
+    this->newX = other.newX;
+    this->newY = other.newY;
+    this->currX = other.currY;
+    this->currY = other.currY;
+  }
   ~generalMove() {}
   void cpy(const generalMove& objCpy)
   {
@@ -90,6 +104,13 @@ class advisorMove: public validMove {
 public:
   advisorMove() {}
   advisorMove(int x, int y) {}
+  advisorMove(const advisorMove& other)
+  {
+    this->newX = other.newX;
+    this->newY = other.newY;
+    this->currX = other.currY;
+    this->currY = other.currY;
+  }
   ~advisorMove() {}
   void cpy(const advisorMove& objCpy)
   {
@@ -119,6 +140,13 @@ class elephantMove: public validMove {
 public:
   elephantMove() {}
   elephantMove(int x, int y) {}
+  elephantMove(const elephantMove& other)
+  {
+    this->newX = other.newX;
+    this->newY = other.newY;
+    this->currX = other.currY;
+    this->currY = other.currY;
+  }
   ~elephantMove() {}
   void cpy(const elephantMove& objCpy)
   {
@@ -148,6 +176,13 @@ class horseMove: public validMove {
 public:
   horseMove() {}
   horseMove(int x, int y) {}
+  horseMove(const horseMove& other)
+  {
+    this->newX = other.newX;
+    this->newY = other.newY;
+    this->currX = other.currY;
+    this->currY = other.currY;
+  }
   ~horseMove() {}
   void cpy(const horseMove& objCpy)
   {
@@ -164,6 +199,13 @@ public:
   chariotMove() {}
   chariotMove(int x, int y) {}
   ~chariotMove() {}
+  chariotMove(const chariotMove& other)
+  {
+    this->newX = other.newX;
+    this->newY = other.newY;
+    this->currX = other.currY;
+    this->currY = other.currY;
+  }
   void cpy(const chariotMove& objCpy)
   {
     this->newX = objCpy.newY;
@@ -179,6 +221,13 @@ public:
   powMove() {}
   powMove(int x, int y) {}
   ~powMove() {}
+  powMove(const powMove& other)
+  {
+    this->newX = other.newX;
+    this->newY = other.newY;
+    this->currX = other.currY;
+    this->currY = other.currY;
+  }
   void cpy(const powMove& objCpy)
   {
     this->newX = objCpy.newY;
@@ -192,7 +241,14 @@ public:
 class soldierMove: public validMove{
 public:
   soldierMove() {}
-  void cpy(const soldierMove& objCpy)
+  soldierMove(const soldierMove& other)
+  {
+    this->newX = other.newX;
+    this->newY = other.newY;
+    this->currX = other.currY;
+    this->currY = other.currY;
+  }
+  void cpy(const soldierMove& objCpy) //maybe change to validMove pointer
   {
     this->newX = objCpy.newY;
     this->newY = objCpy.newY;
@@ -203,10 +259,14 @@ public:
   ~soldierMove() {}
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
     vector<vector<int>> possible;
+    // cout << endl << "curr: " << currX << " " << currY << endl;
+    // cout << "new: " << newX << " " << newY << endl;
+    // cin.get();
+    // cin.ignore();
+    cout << "Calling Move for soldier!" << endl;
 
-    if( (color == RED && currY < 6) || (color == BLACK && currY > 5))
+    if( (color == RED && currY < 5) || (color == BLACK && currY > 4))
     {
-
       vector<int> temp1;
       if(color == RED)
       {
@@ -236,16 +296,20 @@ public:
       return false;
     }
     else {
-      cout << "new: " << newX << " " << newY << endl;
-      cout << "old: " << currX << " " << currY << endl;
+      // cout << "curr: " << currX << " " << currY << endl;
+      // cout << "new: " << newX << " " << newY << endl;
       if(newX != currX)
       {
         return false;
       }
       if(color == RED && newY != currY - 1)
+      {
         return false;
+      }
       if(color == BLACK && newY != currY + 1)
+      {
         return false;
+      }
       return true;
     }
     // return true;

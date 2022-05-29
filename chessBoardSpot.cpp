@@ -66,19 +66,6 @@ void ChessBoardSpot::clear()
   this->move = nullptr;
 }
 
-// need to use this to copy over data; do NOT use = to copy objects
-void ChessBoardSpot::cpy(ChessBoardSpot cpy)
-{
-  this->clear();
-
-  delete this->move;
-
-  this->piece = cpy.piece;
-  this->color = cpy.color;
-  this->boardChar = cpy.boardChar;
-  this->move = new validMove(*cpy.move);
-}
-
 string ChessBoardSpot::getPieceStr()
 {
   switch(this->piece)
@@ -123,13 +110,108 @@ string ChessBoardSpot::getPieceStr()
 
 ChessBoardSpot::ChessBoardSpot(const ChessBoardSpot &cpyObj)
 {
-  this->clear();
   piece = cpyObj.getPiece();
   color = cpyObj.getColor();
   boardChar = cpyObj.getChar();
   delete this->move;
   //this->move->cpy(*cpyObj.getMove());
-  this->move = new validMove(*cpyObj.getMove());
+  // this->move = new validMove(*cpyObj.getMove());
+
+  switch(cpyObj.getPiece())
+  {
+    case GENERAL:
+    {
+      this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
+      break;
+    }
+    case ADVISOR:
+    {
+      this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
+      break;
+    }
+    case ELEPHANT:
+    {
+      this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
+      break;
+    }
+    case HORSE:
+    {
+      this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
+      break;
+    }
+    case CHARIOT:
+    {
+      this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
+      break;
+    }
+    case CANNON:
+    {
+      this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
+      break;
+    }
+    case SOLDIER:
+    {
+      this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
+      break;
+    }
+    default:
+    {
+      this->move = nullptr;
+    }
+  }
+}
+// need to use this to copy over data; do NOT use = to copy objects
+void ChessBoardSpot::cpy(ChessBoardSpot cpyObj)
+{
+  delete this->move;
+
+  this->piece = cpyObj.piece;
+  this->color = cpyObj.color;
+  this->boardChar = cpyObj.boardChar;
+  // this->move = new validMove(*cpy.move);
+
+  switch(cpyObj.getPiece())
+  {
+    case GENERAL:
+    {
+      this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
+      break;
+    }
+    case ADVISOR:
+    {
+      this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
+      break;
+    }
+    case ELEPHANT:
+    {
+      this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
+      break;
+    }
+    case HORSE:
+    {
+      this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
+      break;
+    }
+    case CHARIOT:
+    {
+      this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
+      break;
+    }
+    case CANNON:
+    {
+      this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
+      break;
+    }
+    case SOLDIER:
+    {
+      this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
+      break;
+    }
+    default:
+    {
+      this->move = nullptr;
+    }
+  }
 }
 
 void ChessBoardSpot::setData(pieceTypeEnum piece_, colorEnum color_,

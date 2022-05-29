@@ -36,7 +36,7 @@ class ChessBoardSpot{
     validMove* getMove() const;
 
     void clear();
-    void cpy(ChessBoardSpot cpy);
+    void cpy(ChessBoardSpot cpyObj);
 
     ~ChessBoardSpot();
   private:

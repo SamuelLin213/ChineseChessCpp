@@ -3,3 +3,5 @@ CMakeCache.txt
 Makefile
 cmake_install.cmake
 lib/
+a.exe
+a.exe.stackdump
