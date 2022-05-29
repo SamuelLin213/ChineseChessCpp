@@ -2,6 +2,7 @@
 #define CHESS_DISPLAY_H
 
 #include "enums.h"
+#include "chessBoardSpot.h"
 using namespace std;
 
 // Stores char of spots on chessbaord
@@ -15,42 +16,77 @@ int PIECE_TOTAL = 16; // constant for total pieces per team
 int BOARD_WIDTH = 9;
 int BOARD_HEIGHT = 10;
 
-// Vectors of coordinates, for input/output to textfile
-vector<vector<int>> redCoors(16, vector<int>(3, 0));
-vector<vector<int>> blackCoors(16, vector<int>(3, 0));
+// Stores coordinates of two generals(kings), in the following format:
+//  {blackKingX, blackKingY, redKingX, redKingY}
+vector<int> kingCoor(4);
+bool spotOccupied[10][9]; // Stores status of each spot on board
 
-void defaultCoordinates()
+// Vectors of coordinates, for input/output to textfile
+// vector<vector<int>> redCoors(16, vector<int>(3, 0));
+// vector<vector<int>> blackCoors(16, vector<int>(3, 0));
+
+void clearSpots(ChessBoardSpot** spots)
 {
-  // hard-code default coordinates for black pieces
-  blackCoors[0] = {4, 0, 1};
-  blackCoors[1] = {3, 0, 2};
-  blackCoors[2] = {5, 0, 2};
-  blackCoors[3] = {2, 0, 3};
-  blackCoors[4] = {6, 0, 3};
-  blackCoors[5] = {1, 0, 4};
-  blackCoors[6] = {7, 0, 4};
-  blackCoors[7] = {0, 0, 5};
-  blackCoors[8] = {8, 0, 5};
-  blackCoors[9] = {1, 2, 6};
-  blackCoors[10] = {7, 2, 6};
-  blackCoors[11] = {0, 3, 7};
-  blackCoors[12] = {2, 3, 7};
-  blackCoors[13] = {4, 3, 7};
-  blackCoors[14] = {6, 3, 7};
-  blackCoors[15] = {8, 3, 7};
+  for(int x = 0; x < 9; x++)
+  {
+    for(int y = 0; y < 8; y++)
+    {
+      spots[x][y].clear();
+    }
+  }
 }
 
-void updateChars(int status)
+void defaultCoordinates(ChessBoardSpot** spots)
 {
-  if(status == 1)
-    defaultCoordinates();
+  // Note that the x and y coordinates are swapped for the spots array; spots[y][x]
 
-  for(int a = 0; a < 16; a++)
+  // Black pieces
+  spots[0][4].setData(GENERAL, BLACK, 'G', new generalMove());
+  spots[0][3].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  spots[0][5].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  spots[0][2].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  spots[0][6].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  spots[0][1].setData(HORSE, BLACK, 'H', new horseMove());
+  spots[0][7].setData(HORSE, BLACK, 'H', new horseMove());
+  spots[0][0].setData(CHARIOT, BLACK, 'C', new chariotMove());
+  spots[0][8].setData(CHARIOT, BLACK, 'C', new chariotMove());
+  spots[2][1].setData(CANNON, BLACK, 'P', new powMove());
+  spots[2][7].setData(CANNON, BLACK, 'P', new powMove());
+  for(int x = 0; x < 9; x += 2)
   {
-    int pieceNum = blackCoors[a][2];
-    int xC = blackCoors[a][0], yC = blackCoors[a][1];
+    spots[3][x].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  }
+  kingCoor[0] = 4;
+  kingCoor[1] = 0;
 
-    boardChars[yC][xC] = pieceNum + 48;
+  // Red pieces
+  spots[9][4].setData(GENERAL, RED, 'G', new generalMove());
+  spots[9][3].setData(ADVISOR, RED, 'A', new advisorMove());
+  spots[9][5].setData(ADVISOR, RED, 'A', new advisorMove());
+  spots[9][2].setData(ELEPHANT, RED, 'E', new elephantMove());
+  spots[9][6].setData(ELEPHANT, RED, 'E', new elephantMove());
+  spots[9][1].setData(HORSE, RED, 'H', new horseMove());
+  spots[9][7].setData(HORSE, RED, 'H', new horseMove());
+  spots[9][0].setData(CHARIOT, RED, 'C', new chariotMove());
+  spots[9][8].setData(CHARIOT, RED, 'C', new chariotMove());
+  spots[7][1].setData(CANNON, RED, 'P', new powMove());
+  spots[7][7].setData(CANNON, RED, 'P', new powMove());
+  for(int x = 0; x < 9; x += 2)
+  {
+    spots[6][x].setData(SOLDIER, RED, 'S', new soldierMove());
+  }
+  kingCoor[2] = 4;
+  kingCoor[3] = 9;
+
+  for(int x = 0; x < 10; x++)
+  {
+    for(int y = 0; y < 9; y++)
+    {
+      if(spots[x][y].getPiece() == EMPTY)
+        spotOccupied[x][y] = false;
+      else
+        spotOccupied[x][y] = true;
+    }
   }
 }
 
@@ -59,35 +95,46 @@ void clearScreen()
   cout << "\033[2J\033[1;1H"; //Clears the terminal screen
 }
 
-void printBoard(int status)
+void printBoard(int status, ChessBoardSpot** spots)
 {
-  // Will's board implementation
-  updateChars(status);
+  // print column nums
+  cout << setw(3) << " ";
+  for(int x = 0; x < 9; x++)
+  {
+    cout << MAGENTA << left << setw(5) << x+1;
+  }
+  cout << endl << RESET;
 
   int x, y;
-  for(x = 0; x < 9; x++)
+  for(x = 0; x <= 9; x++)
   {
-    for(y = 0; y < 8; y++)
+    cout << MAGENTA << setw(3) << x+1 << RESET;
+    for(y = 0; y <= 8; y++)
     {
-      cout << boardChars[x][y] << " -- ";
+      if(spots[x][y].getColor() == BLACK)
+        cout << BLACK_C;
+      else if(spots[x][y].getColor() == RED)
+        cout << RED_C;
+      cout << spots[x][y].getChar() << RESET;
+      if(y != 8)
+        cout << " -- ";
     }
-    cout << boardChars[x][y] << endl;
+    cout << endl;
     if(x == 4)
     {
-      cout << left << setw(40) << "|" << "|" << endl;
+      cout << setw(3) << "" << left << setw(40) << "|" << "|" << endl;
       continue;
     }
-    for(y = 0; y < 8; y++)
+    if(x != 9)
     {
-      cout << "|    ";
+      cout << setw(3) << "";
+      for(y = 0; y <= 8; y++)
+      {
+        cout << "|    ";
+      }
+      cout << endl;
     }
-    cout << "|   " << endl;
   }
-  for(int z = 0; z < 8; z++)
-  {
-    cout << boardChars[9][z] << " -- ";
-  }
-  cout << boardChars[9][8] << endl;
 
   cout << endl;
 }

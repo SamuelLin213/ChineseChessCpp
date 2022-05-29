@@ -3,30 +3,48 @@
 
 #include <string>
 #include "enums.h"
+#include "validMove.h"
 // #include "piece.h"
 
 using namespace std;
 
+class validMove;
+
 class ChessBoardSpot{
   public:
-    ChessBoardSpot() {};
+    ChessBoardSpot();
+    ChessBoardSpot(const ChessBoardSpot &cpyObj);
+    ChessBoardSpot(pieceTypeEnum piece_, colorEnum color_, char boardChar_, validMove* move_);
 
-    void setColor(string color_);
-    string getColor();
+    void setData(pieceTypeEnum piece_, colorEnum color_,
+    char boardChar_, validMove* move_);
 
-    void setOccupied(bool occupied_);
-    bool getOccupied();
+    void setColor(colorEnum color_);
+    colorEnum getColor() const;
 
-    string getPiece();
-    void setPiece(string piece_);
+    // void setOccupied(bool occupied_);
+    // bool getOccupied();
 
-    char getChar();
+    pieceTypeEnum getPiece() const;
+    string getPieceStr();
+    void setPiece(pieceTypeEnum piece_);
+
+    char getChar() const;
     void setChar(char char_);
+
+    void setMove(validMove* move_);
+    validMove* getMove() const;
+
+    void clear();
+    void cpy(ChessBoardSpot cpyObj);
+
+    ~ChessBoardSpot();
   private:
-    pieceTypeEnum piece;
-    bool occupied = false;
+    pieceTypeEnum piece = EMPTY;
+    // bool occupied = false;
     colorEnum color = NONE;
     char boardChar = '*';
+    validMove* move = nullptr;
 };
 
 #endif
