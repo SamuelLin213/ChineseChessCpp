@@ -202,8 +202,6 @@ public:
       {    
 
           vector<vector<int> > possible;
-          ChessBoardSpot** spots = new ChessBoardSpot*[BOARD_HEIGHT];
-          ChessBoardSpot temp = spots[currX][currY];
 
           // Make the user even picked a valid locatin the horse can move 
           vector<int> ValidMove1 { currX-1, currY-2}; // Left Up 

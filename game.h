@@ -226,8 +226,8 @@ int playGame(int status)
 
 void loadGame(ChessBoardSpot** spots)
 {
-  vector<vector<int>> blackCoors(16, vector<int>(2, 0));
-  vector<vector<int>> redCoors(16, vector<int>(2, 0));
+  vector<vector<int> > blackCoors(16, vector<int>(2, 0));
+  vector<vector<int> > redCoors(16, vector<int>(2, 0));
 
   ifstream inData;
   inData.open("coordinates.txt");
