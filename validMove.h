@@ -28,7 +28,7 @@ class validMove{
       this->currY = other.currY;
     }
     ~validMove() {}
-    virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {};
+    virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return false; };
   protected:
     int newX;
     int newY;
@@ -57,47 +57,57 @@ public:
     this->currX = objCpy.currX;
   }
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
+    cout << endl << "General move called!" << endl;
+
     //General cannot leave palace [3-5][0-2]
-	 if (((color == BLACK && (newY < 0 || newY > 2)) ||
-            (color == RED && (newY > 9 || newY < 7))) ||
-            (newX < 3 || newX > 5)) {
-            return false;
-         }
-        //can only move one spot up/down or one spot left/right
-        if (abs(currY - newY) == 1 && abs(currX - newX) == 0 ||
-            abs(currY - newY) == 0 && abs(currX - newX) == 1) {
+	 if ( (color == BLACK && (newY < 0 || newY > 2)) ||
+            (color == RED && (newY > 9 || newY < 7)) ||
+            (newX < 3 || newX > 5))
+   {
+     return false;
+   }
+    //can only move one spot up/down or one spot left/right
+    if (abs(currY - newY) == 1 && abs(currX - newX) == 0 ||
+      abs(currY - newY) == 0 && abs(currX - newX) == 1) {
 	    /*cannot be in the same column as the other general unless there
  	     is another piece between them*/
-            if (color == BLACK) {
-                for (int i = newY + 1; i < 10; i++) {
-                    if (occupied[i][newX] == true) {
-                        if (newX == king[2] && i == king[3]) {
-                            return false;
-                        }
-                        else {
-                            return true;
-                        }
-                    }
-                }
-		return true;
-            }
-            if (color == RED) {
-                for (int i = newY - 1; i >= 0; i--) {
-                    if (occupied[i][newX] == true) {
-                        if (newX == king[0] && i == king[1]) {
-                            return false;
-                        }
-                        else {
-                            return true;
-                        }
-                    }
-                }
-		return true;
-            }
-        }
-        return false;
+      if (color == BLACK) {
+          for (int i = newY + 1; i < 10; i++)
+          {
+              if (occupied[i][newX] == true)
+              {
+                  if (newX == king[2] && i == king[3])
+                  {
+                      return false;
+                  }
+                  else {
+                      return true;
+                  }
+              }
+           }
+	         return true;
+       }
+      if (color == RED)
+      {
+          for (int i = newY - 1; i >= 0; i--)
+          {
+              if (occupied[i][newX] == true)
+              {
+                  if (newX == king[0] && i == king[1])
+                  {
+                      return false;
+                  }
+                  else
+                  {
+                      return true;
+                  }
+              }
+          }
+          return true;
+      }
+    }
+    return false;
   }
-
 };
 
 class advisorMove: public validMove {
@@ -264,6 +274,8 @@ public:
     // cin.get();
     // cin.ignore();
     cout << "Calling Move for soldier!" << endl;
+    cin.ignore();
+    cin.get();
 
     if( (color == RED && currY < 5) || (color == BLACK && currY > 4))
     {
