@@ -131,19 +131,19 @@ public:
   }
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
     //Advisor cannot leave Palace (RED[7-9]/BLACK[0-2])[3 -5]
-        if (((color == BLACK && (newY < 0 || newY > 2)) ||
-            (color == RED && (newY > 9 || newY < 7))) ||
-            (newX < 3 || newX > 5)) {
+        if ( (color == BLACK && (newY < 0 || newY > 2)) ||
+            (color == RED && (newY > 9 || newY < 7)) ||
+            (newX < 3 || newX > 5) ) {
             return false;
         }
         //can only move diagonally one space
         if ((abs(currY - newY) == 1 && abs(currX - newX) == 1)) {
             return true;
         }
-	else{
-	    return false;
-	}
-  }
+      	else{
+      	    return false;
+      	}
+    }
 };
 
 class elephantMove: public validMove {

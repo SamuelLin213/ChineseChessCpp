@@ -194,7 +194,30 @@ int playGame(int status)
       spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]);
       if(spots[chosenPiece[1]][chosenPiece[0]].getMove()->move(spotOccupied, spots[chosenPiece[1]][chosenPiece[0]].getColor(), kingCoor))
       {
-        cout << endl << "Works!" << endl;
+        if(spots[chosenPiece[1]][chosenPiece[0]].getPiece() == GENERAL)
+        {
+          if(spots[chosenPiece[1]][chosenPiece[0]].getColor() == BLACK)
+          {
+            kingCoor[0] = targetLocation[0];
+            kingCoor[1] = targetLocation[1];
+            cout << "New general coor: " << kingCoor[0] << " " << kingCoor[1] << endl;
+            cin.ignore();
+            cin.get();
+          }
+          else if(spots[chosenPiece[1]][chosenPiece[0]].getColor() == RED)
+          {
+            kingCoor[2] = targetLocation[0];
+            kingCoor[3] = targetLocation[1];
+            cout << "New general coor: " << kingCoor[2] << " " << kingCoor[3] << endl;
+            cin.ignore();
+            cin.get();
+          }
+        }
+        if(spots[targetLocation[1]][targetLocation[0]].getPiece() == GENERAL)
+        {
+          done = true;
+        }
+
         //ChessBoardSpot tempSpot(spots[chosenPiece[1]][chosenPiece[0]]);
         //spots[targetLocation[1]][targetLocation[0]].clear();
         spots[targetLocation[1]][targetLocation[0]].cpy(spots[chosenPiece[1]][chosenPiece[0]]);
@@ -214,7 +237,8 @@ int playGame(int status)
       redTurn = !redTurn; // inverses so that it's the other player's turn
     }
     else{
-
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
       goto AGAIN;
     }
