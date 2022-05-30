@@ -232,7 +232,14 @@ int playGame(int status)
 
         goto AGAIN;
       }
-
+      if(done)
+      {
+        string winTeam = (redTurn) ? "Team red" : "Team black";
+        cout << endl << YELLOW << "Checkmate! " << winTeam << " won!" << endl;
+        cin.ignore();
+        cin.get();
+        cout << RESET;
+      }
       // Check target spot is empty
       redTurn = !redTurn; // inverses so that it's the other player's turn
     }
@@ -242,8 +249,6 @@ int playGame(int status)
 
       goto AGAIN;
     }
-
-    //check validity of coordinates here(make sure they're within range of board)
   }
   return 1;
 }

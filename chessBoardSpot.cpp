@@ -106,6 +106,7 @@ string ChessBoardSpot::getPieceStr()
       break;
     }
   }
+  return "empty";
 }
 
 ChessBoardSpot::ChessBoardSpot(const ChessBoardSpot &cpyObj)

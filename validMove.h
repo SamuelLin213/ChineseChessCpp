@@ -24,7 +24,7 @@ class validMove{
     {
       this->newX = other.newX;
       this->newY = other.newY;
-      this->currX = other.currY;
+      this->currX = other.currX;
       this->currY = other.currY;
     }
     ~validMove() {}
@@ -45,13 +45,13 @@ public:
   {
     this->newX = other.newX;
     this->newY = other.newY;
-    this->currX = other.currY;
+    this->currX = other.currX;
     this->currY = other.currY;
   }
   ~generalMove() {}
   void cpy(const generalMove& objCpy)
   {
-    this->newX = objCpy.newY;
+    this->newX = objCpy.newX;
     this->newY = objCpy.newY;
     this->currY = objCpy.currY;
     this->currX = objCpy.currX;
@@ -118,13 +118,13 @@ public:
   {
     this->newX = other.newX;
     this->newY = other.newY;
-    this->currX = other.currY;
+    this->currX = other.currX;
     this->currY = other.currY;
   }
   ~advisorMove() {}
   void cpy(const advisorMove& objCpy)
   {
-    this->newX = objCpy.newY;
+    this->newX = objCpy.newX;
     this->newY = objCpy.newY;
     this->currY = objCpy.currY;
     this->currX = objCpy.currX;
@@ -154,13 +154,13 @@ public:
   {
     this->newX = other.newX;
     this->newY = other.newY;
-    this->currX = other.currY;
+    this->currX = other.currX;
     this->currY = other.currY;
   }
   ~elephantMove() {}
   void cpy(const elephantMove& objCpy)
   {
-    this->newX = objCpy.newY;
+    this->newX = objCpy.newX;
     this->newY = objCpy.newY;
     this->currY = objCpy.currY;
     this->currX = objCpy.currX;
@@ -190,13 +190,13 @@ public:
   {
     this->newX = other.newX;
     this->newY = other.newY;
-    this->currX = other.currY;
+    this->currX = other.currX;
     this->currY = other.currY;
   }
   ~horseMove() {}
   void cpy(const horseMove& objCpy)
   {
-    this->newX = objCpy.newY;
+    this->newX = objCpy.newX;
     this->newY = objCpy.newY;
     this->currY = objCpy.currY;
     this->currX = objCpy.currX;
@@ -209,34 +209,62 @@ public:
     chariotMove() {}
     chariotMove(int x, int y) {}
     ~chariotMove() {}
+    chariotMove(const chariotMove& other)
+    {
+      this->newX = other.newX;
+      this->newY = other.newY;
+      this->currX = other.currX;
+      this->currY = other.currY;
+    }
+    void cpy(const chariotMove& objCpy)
+    {
+      this->newX = objCpy.newX;
+      this->newY = objCpy.newY;
+      this->currY = objCpy.currY;
+      this->currX = objCpy.currX;
+    }
     virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
-	if (currX > newX) {
-		for (int i = currX; i > newX; i--) {
-			if (occupied[i][currY] == true) { return false;}
-			else { return true; }
-		}
-	}
-	else if (currX < newX) {
-		for (int i = currX; i < newX; i++) {
-			if (occupied[i][currY] == true) { return false;}
-			else { return true;}
-		}
-	}
-	else if (currY > newY) {
-		for (int i = currY; i > newY; i--) {
-			if (occupied[currX][i] == true) { return false;}
-			else { return true;}
-		}
-	}
-	else if (currY < newY ) {
-		for (int i = currY; i < newY; i++) {
-			if (occupied[currX][i] == true) { return false;}
-			else { return true;}
-		}
-	}
-	else {
-		return false;
-	}
+    	if (currX > newX) { // moving left
+        if(currY != newY)
+        {
+          return false;
+        }
+    		for (int i = currX - 1; i > newX; i--) {
+    			if (occupied[currY][i] == true) { return false;}
+    		}
+        return true;
+    	}
+    	else if (currX < newX) { //moving right
+        if(currY != newY)
+        {
+          return false;
+        }
+    		for (int i = currX + 1; i < newX; i++) {
+    			if (occupied[i][currY] == true) { return false;}
+    		}
+        return true;
+    	}
+    	else if (currY > newY) { // moving up board(from black's POV)
+        if(currX != newX)
+        {
+          return false;
+        }
+    		for (int i = currY - 1; i > newY; i--) {
+    			if (occupied[i][currX] == true) { return false;}
+    		}
+        return true;
+    	}
+    	else if (currY < newY ) { //moving down board(from black's POV)
+        if(currX != newX)
+        {
+          return false;
+        }
+    		for (int i = currY + 1; i < newY; i++) {
+    			if (occupied[i][currX] == true) { return false;}
+    		}
+        return true;
+    	}
+      return false;
    }
 };
 
@@ -249,12 +277,12 @@ public:
   {
     this->newX = other.newX;
     this->newY = other.newY;
-    this->currX = other.currY;
+    this->currX = other.currX;
     this->currY = other.currY;
   }
   void cpy(const powMove& objCpy)
   {
-    this->newX = objCpy.newY;
+    this->newX = objCpy.newX;
     this->newY = objCpy.newY;
     this->currY = objCpy.currY;
     this->currX = objCpy.currX;
@@ -269,12 +297,12 @@ public:
   {
     this->newX = other.newX;
     this->newY = other.newY;
-    this->currX = other.currY;
+    this->currX = other.currX;
     this->currY = other.currY;
   }
   void cpy(const soldierMove& objCpy) //maybe change to validMove pointer
   {
-    this->newX = objCpy.newY;
+    this->newX = objCpy.newX;
     this->newY = objCpy.newY;
     this->currY = objCpy.currY;
     this->currX = objCpy.currX;
