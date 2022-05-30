@@ -204,26 +204,40 @@ public:
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
 };
 
-class chariotMove: public validMove {
+class chariotMove : public validMove {
 public:
-  chariotMove() {}
-  chariotMove(int x, int y) {}
-  ~chariotMove() {}
-  chariotMove(const chariotMove& other)
-  {
-    this->newX = other.newX;
-    this->newY = other.newY;
-    this->currX = other.currY;
-    this->currY = other.currY;
-  }
-  void cpy(const chariotMove& objCpy)
-  {
-    this->newX = objCpy.newY;
-    this->newY = objCpy.newY;
-    this->currY = objCpy.currY;
-    this->currX = objCpy.currX;
-  }
-  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
+    chariotMove() {}
+    chariotMove(int x, int y) {}
+    ~chariotMove() {}
+    virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
+	if (currX > newX) {
+		for (int i = currX; i > newX; i--) {
+			if (occupied[i][currY] == true) { return false;}
+			else { return true; }
+		}
+	}
+	else if (currX < newX) {
+		for (int i = currX; i < newX; i++) {
+			if (occupied[i][currY] == true) { return false;}
+			else { return true;}
+		}
+	}
+	else if (currY > newY) {
+		for (int i = currY; i > newY; i--) {
+			if (occupied[currX][i] == true) { return false;}
+			else { return true;}
+		}
+	}
+	else if (currY < newY ) {
+		for (int i = currY; i < newY; i++) {
+			if (occupied[currX][i] == true) { return false;}
+			else { return true;}
+		}
+	}
+	else {
+		return false;
+	}
+   }
 };
 
 class powMove: public validMove {
