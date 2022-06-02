@@ -72,5 +72,27 @@ public:
 
 };
 
+class SoldierMock_ChessBoardSpot {
+public:
+    enum colorEnum {
+        RED,
+        BLACK,
+        NONE
+    };
+
+    colorEnum color;
+    validMove* move;
+
+    ElephantMock_ChessBoardSpot() {
+        color = BLACK;
+        move = new elephantMove();
+    }
+
+    validMove* getMove() {
+        return move;
+    }
+
+
+};
 
 #endif
