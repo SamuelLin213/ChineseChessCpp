@@ -193,89 +193,82 @@ public:
   }
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) 
   {
-      // CHECK to make sure the user did not put a cordinate that passess the river 
-      if ((color == BLACK && newY > 4) || (color == RED && newY < 5)) 
-      {
-          return false;
-      }
-      else // user picked a location that does not pass the river 
-      {    
+      
+      
 
-          vector<vector<int> > possible;
+    vector<vector<int> > possible;
 
-          // Make the user even picked a valid locatin the horse can move 
-          vector<int> ValidMove1 { currX-1, currY-2}; // Left Up 
-          possible.push_back(ValidMove1);
+    // Make the user even picked a valid locatin the horse can move 
+    vector<int> ValidMove1 { currX-1, currY-2}; // Left Up 
+    possible.push_back(ValidMove1);
           
-          vector<int> ValidMove2 { currX+1, currY-2}; // Left Down 
-          possible.push_back(ValidMove2);
+    vector<int> ValidMove2 { currX+1, currY-2}; // Left Down 
+    possible.push_back(ValidMove2);
 
-          vector<int> ValidMove3 { currX-1, currY+2}; // Right Up  
-          possible.push_back(ValidMove3);
+    vector<int> ValidMove3 { currX-1, currY+2}; // Right Up  
+    possible.push_back(ValidMove3);
           
-          vector<int> ValidMove4 { currX+1, currY+2}; // Right Down 
-          possible.push_back(ValidMove4);
+    vector<int> ValidMove4 { currX+1, currY+2}; // Right Down 
+    possible.push_back(ValidMove4);
 
-          vector<int> ValidMove5 { currX-2, currY-1}; //  Up Left
-          possible.push_back(ValidMove5);
+    vector<int> ValidMove5 { currX-2, currY-1}; //  Up Left
+    possible.push_back(ValidMove5);
 
-          vector<int> ValidMove6 { currX-2, currY+1}; // Up Right
-          possible.push_back(ValidMove6);
+    vector<int> ValidMove6 { currX-2, currY+1}; // Up Right
+    possible.push_back(ValidMove6);
 
-          vector<int> ValidMove7 { currX+2, currY-1}; // Down Left 
-          possible.push_back(ValidMove7);
+    vector<int> ValidMove7 { currX+2, currY-1}; // Down Left 
+    possible.push_back(ValidMove7);
 
-          vector<int> ValidMove8 { currX+2, currY+1}; // Down Right 
-          possible.push_back(ValidMove8);
+    vector<int> ValidMove8 { currX+2, currY+1}; // Down Right 
+    possible.push_back(ValidMove8);
 
-          vector<int> newLocation {newX, newY};
+    vector<int> newLocation {newX, newY};
 
-          // if we enter the if statemnet that means that we have found possibel location horse can move 
-          if(find(possible.begin(), possible.end(), newLocation) != possible.end()) 
+    // if we enter the if statemnet that means that we have found possibel location horse can move 
+    if(find(possible.begin(), possible.end(), newLocation) != possible.end()) 
+    {
+        // lets check if the Vertiacal and Horizontal move prior to the diagonial is empty
+
+        if((currX-1 == newX && currY-2 == newY) || (currX+1 == newX && currY-2 == newY)) // Check if Left move 
+        {
+          if(spotOccupied[currY-1][currX] == false) // Check if Left Location is Empty 
           {
-              // lets check if the Vertiacal and Horizontal move prior to the diagonial is empty
-
-              if((currX-1 == newX && currY-2 == newY) || (currX+1 == newX && currY-2 == newY)) // Check if Left move 
-              {
-                  if(spotOccupied[currY-1][currX] == false) // Check if Left Location is Empty 
-                  {
-                    return true;
-                  }
-              
-              }
-              else if((currX-1 == newX && currY+2 == newY) || (currX+1 == newX && currY+2 == newY))// Check if Right Move 
-              {
-                  if(spotOccupied[currY+1][currX] == false) // Check if Right Location is Empty 
-                  {
-                      return true;
-                  }
-              }
-              else if((currX-2 == newX && currY-1 == newY) || (currX-2 == newX && currY+1 == newY)) // Chek if up Move
-              {
-                  if(spotOccupied[currY][currX-1] == false) // Check if Up Location is Empty 
-                  {
-                      return true;
-                  }
-              }
-              
-              else if((currX+2 == newX && currY-1 == newY) || (currX+2 == newX && currY+1 == newY)) // Check if Down Move
-              { 
-                  if(spotOccupied[currY][currX+1] == false) // Check if Down Location is Empty 
-                  {
-                      return true;
-                  }
-              }
-              else 
-               return false;
-
+            return true;
           }
-          
-          else 
-            return false;
               
-      }
-  }
-};
+        }
+        
+        else if((currX-1 == newX && currY+2 == newY) || (currX+1 == newX && currY+2 == newY))// Check if Right Move 
+        {
+          if(spotOccupied[currY+1][currX] == false) // Check if Right Location is Empty 
+          {
+            return true;
+          }
+        }
+        
+        else if((currX-2 == newX && currY-1 == newY) || (currX-2 == newX && currY+1 == newY)) // Chek if up Move
+        {
+          if(spotOccupied[currY][currX-1] == false) // Check if Up Location is Empty 
+          {
+            return true;
+          }
+        }
+              
+        else if((currX+2 == newX && currY-1 == newY) || (currX+2 == newX && currY+1 == newY)) // Check if Down Move
+        { 
+          if(spotOccupied[currY][currX+1] == false) // Check if Down Location is Empty 
+            {
+              return true;
+            }
+        }
+        else 
+          return false;
+
+    }       
+    
+    }
+  };
 
 class chariotMove: public validMove {
 public:
