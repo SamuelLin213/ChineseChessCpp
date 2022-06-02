@@ -57,8 +57,6 @@ public:
     this->currX = objCpy.currX;
   }
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
-    cout << endl << "General move called!" << endl;
-
     //General cannot leave palace [3-5][0-2]
 	 if ( (color == BLACK && (newY < 0 || newY > 2)) ||
             (color == RED && (newY > 9 || newY < 7)) ||
@@ -201,7 +199,75 @@ public:
     this->currY = objCpy.currY;
     this->currX = objCpy.currX;
   }
-  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { return true; }
+  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
+      vector<vector<int> > possible;
+
+      // Make sure the user picked a valid location
+      vector<int> ValidMove1 { currX-2, currY-1}; // Left Up
+      possible.push_back(ValidMove1);
+
+      vector<int> ValidMove2 { currX-2, currY+1}; // Left Down
+      possible.push_back(ValidMove2);
+
+      vector<int> ValidMove3 { currX+2, currY-1}; // Right Up
+      possible.push_back(ValidMove3);
+
+      vector<int> ValidMove4 { currX+2, currY+1}; // Right Down
+      possible.push_back(ValidMove4);
+
+      vector<int> ValidMove5 { currX-1, currY-2}; //  Up Left
+      possible.push_back(ValidMove5);
+
+      vector<int> ValidMove6 { currX+1, currY-2}; // Up Right
+      possible.push_back(ValidMove6);
+
+      vector<int> ValidMove7 { currX-1, currY+2}; // Down Left
+      possible.push_back(ValidMove7);
+
+      vector<int> ValidMove8 { currX+1, currY+2}; // Down Right
+      possible.push_back(ValidMove8);
+
+      vector<int> newLocation {newX, newY};
+
+      // if we enter the if statemnet that means that we have found possibel location horse can move
+      if(find(possible.begin(), possible.end(), newLocation) != possible.end())
+      {
+          // lets check if the Vertical and Horizontal move prior to the diagonal is empty
+          if((currX-1 == newX && currY-2 == newY) || (currX+1 == newX && currY-2 == newY)) // Check if up move
+          {
+              if(occupied[currY-1][currX] == false) // Check if Left Location is Empty
+              {
+                return true;
+              }
+          }
+          else if((currX-1 == newX && currY+2 == newY) || (currX+1 == newX && currY+2 == newY))// Check if down Move
+          {
+              if(occupied[currY+1][currX] == false) // Check if Right Location is Empty
+              {
+                  return true;
+              }
+          }
+          else if((currX-2 == newX && currY-1 == newY) || (currX-2 == newX && currY+1 == newY)) // Chcek if left Move
+          {
+              if(occupied[currY][currX-1] == false) // Check if Up Location is Empty
+              {
+                  return true;
+              }
+          }
+
+          else if((currX+2 == newX && currY-1 == newY) || (currX+2 == newX && currY+1 == newY)) // Check if right Move
+          {
+              if(occupied[currY][currX+1] == false) // Check if Down Location is Empty
+              {
+                  return true;
+              }
+          }
+          return false;
+
+      }
+      else
+        return false;
+    }
 };
 
 class chariotMove : public validMove {
@@ -300,6 +366,7 @@ public:
     this->currX = other.currX;
     this->currY = other.currY;
   }
+  soldierMove& operator=(const soldierMove& rhs) { return *this; }
   void cpy(const soldierMove& objCpy) //maybe change to validMove pointer
   {
     this->newX = objCpy.newX;
@@ -311,13 +378,6 @@ public:
   ~soldierMove() {}
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
     vector<vector<int>> possible;
-    // cout << endl << "curr: " << currX << " " << currY << endl;
-    // cout << "new: " << newX << " " << newY << endl;
-    // cin.get();
-    // cin.ignore();
-    cout << "Calling Move for soldier!" << endl;
-    cin.ignore();
-    cin.get();
 
     if( (color == RED && currY < 5) || (color == BLACK && currY > 4))
     {
@@ -334,11 +394,6 @@ public:
       vector<int> temp3 = {currX + 1, currY};
       vector<int> temp4 = {newX, newY};
 
-      // cout << endl << temp1[0] << " " << temp1[1] << endl;
-      // cout << temp2[0] << " " << temp2[1] << endl;
-      // cout << temp3[0] << " " << temp3[1] << endl;
-      // cout << temp4[0] << " " << temp4[1] << endl << endl;
-
       possible.push_back(temp1);
       possible.push_back(temp2);
       possible.push_back(temp3);
@@ -350,8 +405,6 @@ public:
       return false;
     }
     else {
-      // cout << "curr: " << currX << " " << currY << endl;
-      // cout << "new: " << newX << " " << newY << endl;
       if(newX != currX)
       {
         return false;

@@ -39,6 +39,13 @@ class ChessBoardSpot{
     void cpy(ChessBoardSpot cpyObj);
 
     ~ChessBoardSpot();
+
+    void print() {
+        cout << "Piece: " << getPieceStr() << endl;
+        cout << "Color: " << ((getColor() == 0) ? "red" : "black") << endl;
+        cout << "Board Char: " << boardChar << endl;
+        cout << "Move: " << ((move == nullptr) ? "null" : "not null") << endl << endl;
+    }
   private:
     pieceTypeEnum piece = EMPTY;
     // bool occupied = false;

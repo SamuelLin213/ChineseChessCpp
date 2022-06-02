@@ -63,7 +63,7 @@ void ChessBoardSpot::clear()
   this->piece = EMPTY;
   this->color = NONE;
   this->boardChar = '*';
-  this->move = nullptr;
+  delete this->move;
 }
 
 string ChessBoardSpot::getPieceStr()
@@ -114,50 +114,58 @@ ChessBoardSpot::ChessBoardSpot(const ChessBoardSpot &cpyObj)
   piece = cpyObj.getPiece();
   color = cpyObj.getColor();
   boardChar = cpyObj.getChar();
-  delete this->move;
   //this->move->cpy(*cpyObj.getMove());
   // this->move = new validMove(*cpyObj.getMove());
+  delete this->move;
 
-  switch(cpyObj.getPiece())
+  if(cpyObj.getMove() == nullptr)
   {
-    case GENERAL:
+    this->move = nullptr;
+  }
+  else{
+    switch(cpyObj.getPiece())
     {
-      this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
-      break;
-    }
-    case ADVISOR:
-    {
-      this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
-      break;
-    }
-    case ELEPHANT:
-    {
-      this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
-      break;
-    }
-    case HORSE:
-    {
-      this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
-      break;
-    }
-    case CHARIOT:
-    {
-      this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
-      break;
-    }
-    case CANNON:
-    {
-      this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
-      break;
-    }
-    case SOLDIER:
-    {
-      this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
-      break;
-    }
-    default:
-    {
-      this->move = nullptr;
+      case GENERAL:
+      {
+        this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
+        break;
+      }
+      case ADVISOR:
+      {
+        this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
+        break;
+      }
+      case ELEPHANT:
+      {
+        this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
+        break;
+      }
+      case HORSE:
+      {
+        this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
+        break;
+      }
+      case CHARIOT:
+      {
+        this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
+        break;
+      }
+      case CANNON:
+      {
+        this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
+        break;
+      }
+      case SOLDIER:
+      {
+        // this->move = new soldierMove();
+        // *(this->move) = *( dynamic_cast<soldierMove*>(cpyObj.getMove() ) );
+        this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
+        break;
+      }
+      default:
+      {
+        this->move = nullptr;
+      }
     }
   }
 }
@@ -170,47 +178,52 @@ void ChessBoardSpot::cpy(ChessBoardSpot cpyObj)
   this->color = cpyObj.color;
   this->boardChar = cpyObj.boardChar;
   // this->move = new validMove(*cpy.move);
-
-  switch(cpyObj.getPiece())
+  if(cpyObj.getMove() == nullptr)
   {
-    case GENERAL:
+    this->move = nullptr;
+  }
+  else{
+    switch(cpyObj.getPiece())
     {
-      this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
-      break;
-    }
-    case ADVISOR:
-    {
-      this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
-      break;
-    }
-    case ELEPHANT:
-    {
-      this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
-      break;
-    }
-    case HORSE:
-    {
-      this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
-      break;
-    }
-    case CHARIOT:
-    {
-      this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
-      break;
-    }
-    case CANNON:
-    {
-      this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
-      break;
-    }
-    case SOLDIER:
-    {
-      this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
-      break;
-    }
-    default:
-    {
-      this->move = nullptr;
+      case GENERAL:
+      {
+        this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
+        break;
+      }
+      case ADVISOR:
+      {
+        this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
+        break;
+      }
+      case ELEPHANT:
+      {
+        this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
+        break;
+      }
+      case HORSE:
+      {
+        this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
+        break;
+      }
+      case CHARIOT:
+      {
+        this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
+        break;
+      }
+      case CANNON:
+      {
+        this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
+        break;
+      }
+      case SOLDIER:
+      {
+        this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
+        break;
+      }
+      default:
+      {
+        this->move = nullptr;
+      }
     }
   }
 }

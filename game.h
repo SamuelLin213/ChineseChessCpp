@@ -224,6 +224,74 @@ int playGame(int status)
         spots[chosenPiece[1]][chosenPiece[0]].clear();
         spotOccupied[targetLocation[1]][targetLocation[0]] = true;
         spotOccupied[chosenPiece[1]][chosenPiece[0]] = false;
+
+        if(spots[targetLocation[1]][targetLocation[0]].getMove() == nullptr)
+        {
+          cout << "Target has null pointer!" << endl;
+          cin.ignore();
+          cin.get();
+        }
+        else {
+          switch(spots[targetLocation[1]][targetLocation[0]].getPiece())
+          {
+            case GENERAL:
+            {
+              cout << "Target has gen pointer!" << endl;
+              cin.ignore();
+              cin.get();
+              break;
+            }
+            case ADVISOR:
+            {
+              cout << "Target has adv pointer!" << endl;
+              cin.ignore();
+              cin.get();
+              break;
+            }
+            case ELEPHANT:
+            {
+              cout << "Target has elephant pointer!" << endl;
+              cin.ignore();
+              cin.get();
+              break;
+            }
+            case HORSE:
+            {
+              cout << "Target has horse pointer!" << endl;
+              cin.ignore();
+              cin.get();
+              break;
+            }
+            case CHARIOT:
+            {
+              cout << "Target has chariot pointer!" << endl;
+              cin.ignore();
+              cin.get();
+              break;
+            }
+            case CANNON:
+            {
+              cout << "Target has cannon pointer!" << endl;
+              cin.ignore();
+              cin.get();
+              break;
+            }
+            case SOLDIER:
+            {
+              cout << "Target has soldier pointer!" << endl;
+              cin.ignore();
+              cin.get();
+              break;
+            }
+            default:
+            {
+              cout << "???" << endl;
+              cin.ignore();
+              cin.get();
+              break;
+            }
+          }
+        }
       }
       else{
         cout << "Invalid move! Please try again.";
