@@ -392,6 +392,40 @@ public:
        else{
             return pc == 0 ? true : false;
        }
+  }  
+  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { 
+      int pc = 0;
+
+      if (currX > newX && currY == newY) {
+            for (int i = currX - 1; i > newX; i--) {
+                if (occupied[currY][i] == true) { pc++; }
+            }
+       }
+       else if (currX < newX && currY == newY) {
+            for (int i = currX + 1; i < newX; i++) {
+                if (occupied[currY][i] == true) { pc++; }
+            }
+       }
+       else if (currY > newY && currX == newX) {
+            for (int i = currY - 1; i > newY; i--) {
+                if (occupied[i][currX] == true) { pc++; }
+            }
+       }
+       else if (currY < newY && currX == newX) {
+            for (int i = currY + 1; i < newY; i++) {
+                if (occupied[i][currX] == true) { pc++; }
+            }
+       }
+       else {
+            return false;
+       }
+
+       if (occupied[newY][newX] == true) {
+            return pc == 1 ? true : false;
+       }
+       else{
+            return pc == 0 ? true : false;
+       }
   }
 };
 
