@@ -13,6 +13,7 @@
 #define BLACK_C  "\033[36m" // Changed black coloring to cyan for more visibility
 #define RED_C     "\033[31m" // Red coloring
 #define MAGENTA "\033[35m" // for numbers on side of board
+#define YELLOW  "\033[33m" // for winning message
 
 enum pieceTypeEnum {
   GENERAL,
