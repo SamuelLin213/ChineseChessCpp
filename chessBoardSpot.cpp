@@ -123,43 +123,92 @@ ChessBoardSpot::ChessBoardSpot(const ChessBoardSpot &cpyObj)
     this->move = nullptr;
   }
   else{
+    // switch(cpyObj.getPiece())
+    // {
+    //   case GENERAL:
+    //   {
+    //     this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case ADVISOR:
+    //   {
+    //     this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case ELEPHANT:
+    //   {
+    //     this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case HORSE:
+    //   {
+    //     this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case CHARIOT:
+    //   {
+    //     this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case CANNON:
+    //   {
+    //     this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case SOLDIER:
+    //   {
+    //     // this->move = new soldierMove();
+    //     // *(this->move) = *( dynamic_cast<soldierMove*>(cpyObj.getMove() ) );
+    //     this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   default:
+    //   {
+    //     this->move = nullptr;
+    //   }
+    // }
     switch(cpyObj.getPiece())
     {
       case GENERAL:
       {
-        this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
+        this->move = new generalMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case ADVISOR:
       {
-        this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
+        this->move = new advisorMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case ELEPHANT:
       {
-        this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
+        this->move = new elephantMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case HORSE:
       {
-        this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
+        this->move = new horseMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case CHARIOT:
       {
-        this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
+        this->move = new chariotMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case CANNON:
       {
-        this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
+        this->move = new powMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case SOLDIER:
       {
-        // this->move = new soldierMove();
-        // *(this->move) = *( dynamic_cast<soldierMove*>(cpyObj.getMove() ) );
-        this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
+        this->move = new soldierMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       default:
@@ -183,41 +232,90 @@ void ChessBoardSpot::cpy(ChessBoardSpot cpyObj)
     this->move = nullptr;
   }
   else{
+    // switch(cpyObj.getPiece())
+    // {
+    //   case GENERAL:
+    //   {
+    //     this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case ADVISOR:
+    //   {
+    //     this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case ELEPHANT:
+    //   {
+    //     this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case HORSE:
+    //   {
+    //     this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case CHARIOT:
+    //   {
+    //     this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case CANNON:
+    //   {
+    //     this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   case SOLDIER:
+    //   {
+    //     this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
+    //     break;
+    //   }
+    //   default:
+    //   {
+    //     this->move = nullptr;
+    //   }
+    // }
     switch(cpyObj.getPiece())
     {
       case GENERAL:
       {
-        this->move = new generalMove(*dynamic_cast<generalMove*>(cpyObj.getMove()));
+        this->move = new generalMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case ADVISOR:
       {
-        this->move = new advisorMove(*dynamic_cast<advisorMove*>(cpyObj.getMove()));
+        this->move = new advisorMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case ELEPHANT:
       {
-        this->move = new elephantMove(*dynamic_cast<elephantMove*>(cpyObj.getMove()));
+        this->move = new elephantMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case HORSE:
       {
-        this->move = new horseMove(*dynamic_cast<horseMove*>(cpyObj.getMove()));
+        this->move = new horseMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case CHARIOT:
       {
-        this->move = new chariotMove(*dynamic_cast<chariotMove*>(cpyObj.getMove()));
+        this->move = new chariotMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case CANNON:
       {
-        this->move = new powMove(*dynamic_cast<powMove*>(cpyObj.getMove()));
+        this->move = new powMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       case SOLDIER:
       {
-        this->move = new soldierMove(*dynamic_cast<soldierMove*>(cpyObj.getMove()));
+        this->move = new soldierMove();
+        this->move->cpy(*cpyObj.getMove());
         break;
       }
       default:

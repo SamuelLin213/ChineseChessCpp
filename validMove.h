@@ -19,7 +19,12 @@ class validMove{
       currX = currX_;
       currY = currY_;
     }
-    virtual void cpy(const validMove& cpyObj) {};
+    void cpy(const validMove& other) {
+      this->newX = other.newX;
+      this->newY = other.newY;
+      this->currX = other.currX;
+      this->currY = other.currY;
+    };
     validMove(const validMove& other)
     {
       this->newX = other.newX;
@@ -41,13 +46,13 @@ class generalMove: public validMove {
 public:
   generalMove() {}
   generalMove(int x, int y) {}
-  generalMove(const generalMove& other)
-  {
-    this->newX = other.newX;
-    this->newY = other.newY;
-    this->currX = other.currX;
-    this->currY = other.currY;
-  }
+  // generalMove(const generalMove& other)
+  // {
+  //   this->newX = other.newX;
+  //   this->newY = other.newY;
+  //   this->currX = other.currX;
+  //   this->currY = other.currY;
+  // }
   ~generalMove() {}
   void cpy(const generalMove& objCpy)
   {
@@ -112,13 +117,13 @@ class advisorMove: public validMove {
 public:
   advisorMove() {}
   advisorMove(int x, int y) {}
-  advisorMove(const advisorMove& other)
-  {
-    this->newX = other.newX;
-    this->newY = other.newY;
-    this->currX = other.currX;
-    this->currY = other.currY;
-  }
+  // advisorMove(const advisorMove& other)
+  // {
+  //   this->newX = other.newX;
+  //   this->newY = other.newY;
+  //   this->currX = other.currX;
+  //   this->currY = other.currY;
+  // }
   ~advisorMove() {}
   void cpy(const advisorMove& objCpy)
   {
@@ -148,13 +153,13 @@ class elephantMove: public validMove {
 public:
   elephantMove() {}
   elephantMove(int x, int y) {}
-  elephantMove(const elephantMove& other)
-  {
-    this->newX = other.newX;
-    this->newY = other.newY;
-    this->currX = other.currX;
-    this->currY = other.currY;
-  }
+  // elephantMove(const elephantMove& other)
+  // {
+  //   this->newX = other.newX;
+  //   this->newY = other.newY;
+  //   this->currX = other.currX;
+  //   this->currY = other.currY;
+  // }
   ~elephantMove() {}
   void cpy(const elephantMove& objCpy)
   {
@@ -192,13 +197,13 @@ public:
     this->currY = other.currY;
   }
   ~horseMove() {}
-  void cpy(const horseMove& objCpy)
-  {
-    this->newX = objCpy.newX;
-    this->newY = objCpy.newY;
-    this->currY = objCpy.currY;
-    this->currX = objCpy.currX;
-  }
+  // void cpy(const horseMove& objCpy)
+  // {
+  //   this->newX = objCpy.newX;
+  //   this->newY = objCpy.newY;
+  //   this->currY = objCpy.currY;
+  //   this->currX = objCpy.currX;
+  // }
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
       vector<vector<int> > possible;
 
@@ -282,13 +287,13 @@ public:
       this->currX = other.currX;
       this->currY = other.currY;
     }
-    void cpy(const chariotMove& objCpy)
-    {
-      this->newX = objCpy.newX;
-      this->newY = objCpy.newY;
-      this->currY = objCpy.currY;
-      this->currX = objCpy.currX;
-    }
+    // void cpy(const chariotMove& objCpy)
+    // {
+    //   this->newX = objCpy.newX;
+    //   this->newY = objCpy.newY;
+    //   this->currY = objCpy.currY;
+    //   this->currX = objCpy.currX;
+    // }
     virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
     	if (currX > newX) { // moving left
         if(currY != newY)
@@ -346,15 +351,15 @@ public:
     this->currX = other.currX;
     this->currY = other.currY;
   }
-  void cpy(const powMove& objCpy)
-  {
-    this->newX = objCpy.newX;
-    this->newY = objCpy.newY;
-    this->currY = objCpy.currY;
-    this->currX = objCpy.currX;
-  }
-  
-  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) { 
+  // void cpy(const powMove& objCpy)
+  // {
+  //   this->newX = objCpy.newX;
+  //   this->newY = objCpy.newY;
+  //   this->currY = objCpy.currY;
+  //   this->currX = objCpy.currX;
+  // }
+
+  virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
       int pc = 0;
 
       if (currX > newX && currY == newY) {
@@ -401,13 +406,13 @@ public:
     this->currY = other.currY;
   }
   soldierMove& operator=(const soldierMove& rhs) { return *this; }
-  void cpy(const soldierMove& objCpy) //maybe change to validMove pointer
-  {
-    this->newX = objCpy.newX;
-    this->newY = objCpy.newY;
-    this->currY = objCpy.currY;
-    this->currX = objCpy.currX;
-  }
+  // void cpy(const soldierMove& objCpy) //maybe change to validMove pointer
+  // {
+  //   this->newX = objCpy.newX;
+  //   this->newY = objCpy.newY;
+  //   this->currY = objCpy.currY;
+  //   this->currX = objCpy.currX;
+  // }
   soldierMove(int x, int y) {}
   ~soldierMove() {}
   virtual bool move(bool occupied[][9], colorEnum color, vector<int> king) {
