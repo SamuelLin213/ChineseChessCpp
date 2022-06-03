@@ -40,6 +40,19 @@ void initializeSpots(ChessBoardSpot** spots)
   }
 }
 
+void deleteSpots(ChessBoardSpot** spots)
+{
+  for(int x = 0; x < BOARD_HEIGHT; x++)
+  {
+    // for(int y = 0; y < BOARD_HEIGHT; y++)
+    // {
+    //   delete spots[x][y];
+    // }
+    delete [] spots[x];
+  }
+  delete [] spots;
+}
+
 int playGame(int status)
 {
 
@@ -319,6 +332,9 @@ int playGame(int status)
       goto AGAIN;
     }
   }
+
+  deleteSpots(spots);
+
   return 1;
 }
 
