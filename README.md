@@ -19,6 +19,7 @@
  > * The strategy design pattern allowed us to write better code, by separating the verification of the next move into different classes, and have the right variation of the function be called. 
  
  ## Screenshots
+> *
 ![Opening menu](images/menu1.png)
 > * Opening menu, from which users select to either start a new game, with pieces in their default positions, or load a saved game, using coordinates saved in a .txt file. 
 ![Initial game menu](images/menu2.png)
