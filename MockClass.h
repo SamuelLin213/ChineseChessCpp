@@ -83,9 +83,9 @@ public:
     colorEnum color;
     validMove* move;
 
-    ElephantMock_ChessBoardSpot() {
+    SoldierMock_ChessBoardSpot() {
         color = BLACK;
-        move = new elephantMove();
+        move = new soldierMove();
     }
 
     validMove* getMove() {

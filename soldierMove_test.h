@@ -121,7 +121,4 @@ TEST(SolderInvalidMove, MoveRight)
     EXPECT_FALSE(soldierObject.move->move(occupied, BLACK, king));
 }
 
-
-
-
 #endif
