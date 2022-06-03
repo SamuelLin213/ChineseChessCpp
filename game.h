@@ -33,7 +33,7 @@ void initializeSpots(ChessBoardSpot** spots)
   {
     spots[x] = new ChessBoardSpot[BOARD_WIDTH];
 
-    for(int y = 0; y < BOARD_HEIGHT; y++)
+    for(int y = 0; y < BOARD_WIDTH; y++)
     {
       spots[x][y] = ChessBoardSpot();
     }
@@ -192,7 +192,7 @@ int playGame(int status)
 
       temp.clear();
 
-      temp = spots[targetLocation[1]][targetLocation[0]];
+      temp.cpy(spots[targetLocation[1]][targetLocation[0]]);
 
       if(redTurn && temp.getColor() == RED)
       {
