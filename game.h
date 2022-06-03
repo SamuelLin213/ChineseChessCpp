@@ -48,9 +48,10 @@ void deleteSpots(ChessBoardSpot** spots)
     // {
     //   delete spots[x][y];
     // }
-    delete [] spots[x];
+    if(spots[x] != nullptr)
+        delete [] spots[x]; 
   }
-  delete [] spots;
+  delete [] spots; // deletes spots[height]
 }
 
 int playGame(int status)
@@ -189,6 +190,8 @@ int playGame(int status)
       targetLocation[0] -= 1;
       targetLocation[1] -= 1;
 
+      temp.clear();
+
       temp = spots[targetLocation[1]][targetLocation[0]];
 
       if(redTurn && temp.getColor() == RED)
@@ -207,6 +210,7 @@ int playGame(int status)
 
         goto NEWCOOR;
       }
+      temp.clear();
 
       //coorsO - original coordinates, coors - new coordinates
       spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]);

@@ -64,6 +64,7 @@ void ChessBoardSpot::clear()
   this->color = NONE;
   this->boardChar = '*';
   delete this->move;
+  this->move = nullptr;
 }
 
 string ChessBoardSpot::getPieceStr()
