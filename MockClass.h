@@ -15,7 +15,6 @@ public:
     validMove* move;
 
     GeneralMock_ChessBoardSpot() {
-        color = BLACK;
         move = new generalMove();
     }
 
@@ -38,7 +37,6 @@ public:
     validMove* move;
 
     AdvisorMock_ChessBoardSpot() {
-        color = BLACK;
         move = new advisorMove();
     }
 
@@ -61,16 +59,29 @@ public:
     validMove* move;
 
     ElephantMock_ChessBoardSpot() {
-        color = BLACK;
         move = new elephantMove();
     }
 
     validMove* getMove() {
         return move;
     }
-
-
 };
+
+class PowMock_ChessBoardSpot {
+public:
+    enum colorEnum {
+        RED,
+        BLACK,
+        NONE
+    };
+
+    colorEnum color;
+    validMove* move;
+
+    PowMock_ChessBoardSpot() {
+        move = new powMove();
+    }
+
 
 class SoldierMock_ChessBoardSpot {
 public:
@@ -91,8 +102,5 @@ public:
     validMove* getMove() {
         return move;
     }
-
-
 };
-
 #endif
