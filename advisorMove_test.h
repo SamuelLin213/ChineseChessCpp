@@ -6,7 +6,6 @@
 #include "validMove.h"
 #include "MockClass.h"
 
-
 TEST(BAdvisorTest, BA_RDiag) {
     AdvisorMock_ChessBoardSpot ba;
     ba.move->setCoors(4, 1, 5, 2);

@@ -21,8 +21,6 @@ public:
     validMove* getMove() {
         return move;
     }
-
-
 };
 
 class AdvisorMock_ChessBoardSpot {
@@ -81,7 +79,7 @@ public:
     PowMock_ChessBoardSpot() {
         move = new powMove();
     }
-
+};
 
 class SoldierMock_ChessBoardSpot {
 public:
