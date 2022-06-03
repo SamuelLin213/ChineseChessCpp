@@ -138,7 +138,7 @@ public:
 
     HorseMock_ChessBoardSpot() {
         color = BLACK;
-        move = new HorseMove();
+        move = new horseMove();
     }
 
     validMove* getMove() {
