@@ -117,7 +117,7 @@ TEST(ChariotMove, MoveDiagonal) {
     };
 
     vector<int> king = { 3,0,5,9};
-    EXPECT_FALSE(diag.move->(occupied, BLACK, king));
+    EXPECT_FALSE(diag.move->move(occupied, BLACK, king));
 }
 
 #endif

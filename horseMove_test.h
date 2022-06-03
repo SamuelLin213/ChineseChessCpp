@@ -92,7 +92,7 @@ TEST(HorseTest, MoveUpLeft) {
 }
 
 
-TEST(HorseTest, MoveDownRight) {
+TEST(HorseTest, MoveDownRight1) {
 	HorseMock_ChessBoardSpot h;
 	h.move->setCoors(2,0,4,1);
 

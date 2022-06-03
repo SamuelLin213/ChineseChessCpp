@@ -6,6 +6,7 @@
 #include "soldierMove_test.h"
 #include "powMove_test.h"
 #include "horseMove_test.h"
+#include "chariotMove_test.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
