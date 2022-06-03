@@ -6,7 +6,7 @@
 ## Project Description
  > * The project is important and interesting to us, as it allows us to learn a new game and explore Chinese Chess using C++ implementation. Additionally, Chinese Chess provides a different perspective, in contrast to the traditional chess that most people are familiar with. There's a lot to consider when creating Chinese Chess, as opposed to traditional Chess. 
  > * At this moment, we plan to use C++ as the main language of the project, alongside the Linux terminal, which will provide the "front-end" aspect of the project.
- > * The project will take in the piece selection and a pair of coordinates, in order to allow users to move a specific piece, to specific coordinates. After every move, the terminal clear the screen and output the new board. When a game is won, the program will stop prompting for piece selection and coordinate inputs, and will output a message indicating the victory or loss. Additionally, the program will implement the function to save and load games, via data saved into a local .txt file. When the program first runs, it will read the data from the local directory, and prompt the user whether they would like to continue from the saved game. Users will also have the option to save the current game, which leads to the coordinates/data of the game being loaded into the .txt file. Symbols on the terminal output, alongside a index at the side, will represent each Chess piece. 
+ > * The project will prompt the user for the coordinates of the piece they wish to move, and the coordinates they wish to move the piece to. After every move, the terminal clears the screen and outputs an updated board. When a game is won, the program will stop prompting for piece selection and coordinate inputs, and will output a message indicating which team won. Additionally, the program will implement the function to load the game from data saved in a local .txt file. When the program first runs, it will prompt the user whether they would like to continue from a saved game or start a new game. Color-coded numbers on the terminal output, alongside a index at the side, will represent each Chess piece. 
  
 ## Class Diagram
  ![UML Notation](images/uml_notation.png)
@@ -19,6 +19,7 @@
  > * The strategy design pattern allowed us to write better code, by separating the verification of the next move into different classes, and have the right variation of the function be called. 
  
  ## Screenshots
+> * Users are greeted with menu and prompts upon running the program: <br />
 ![Opening menu](images/menu1.png)
 > * Opening menu, from which users select to either start a new game, with pieces in their default positions, or load a saved game, using coordinates saved in a .txt file. 
 ![Initial game menu](images/menu2.png)
