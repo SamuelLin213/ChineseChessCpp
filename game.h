@@ -3,6 +3,7 @@
 
 #include "enums.h"
 #include "chessDisplay.h"
+#include <limits>
 #include "chessBoardSpot.h"
 #include <unordered_map>
 using namespace std;
@@ -32,11 +33,25 @@ void initializeSpots(ChessBoardSpot** spots)
   {
     spots[x] = new ChessBoardSpot[BOARD_WIDTH];
 
-    for(int y = 0; y < BOARD_HEIGHT; y++)
+    for(int y = 0; y < BOARD_WIDTH; y++)
     {
       spots[x][y] = ChessBoardSpot();
     }
   }
+}
+
+void deleteSpots(ChessBoardSpot** spots)
+{
+  for(int x = 0; x < BOARD_HEIGHT; x++)
+  {
+    // for(int y = 0; y < BOARD_HEIGHT; y++)
+    // {
+    //   delete spots[x][y];
+    // }
+    if(spots[x] != nullptr)
+        delete [] spots[x]; 
+  }
+  delete [] spots; // deletes spots[height]
 }
 
 int playGame(int status)
@@ -92,12 +107,14 @@ int playGame(int status)
 
     if(chosenPiece[0] == 0)
     {
+      deleteSpots(spots);
       return 3;
     }
     cin >> chosenPiece[1];
 
     if(chosenPiece[1] == 0)
     {
+      deleteSpots(spots);
       return 3;
     }
     if(chosenPiece[0] < 0 || chosenPiece[0] > BOARD_WIDTH || chosenPiece[1] < 0 || chosenPiece[1] > BOARD_HEIGHT)
@@ -150,6 +167,7 @@ int playGame(int status)
 
       if(targetLocation[0] == 0)
       {
+        deleteSpots(spots); 
         return 3;
       }
 
@@ -157,6 +175,7 @@ int playGame(int status)
 
       if(targetLocation[1] == 0)
       {
+        deleteSpots(spots);
         return 3;
       }
 
@@ -171,7 +190,9 @@ int playGame(int status)
       targetLocation[0] -= 1;
       targetLocation[1] -= 1;
 
-      temp = spots[targetLocation[1]][targetLocation[0]];
+      temp.clear();
+
+      temp.cpy(spots[targetLocation[1]][targetLocation[0]]);
 
       if(redTurn && temp.getColor() == RED)
       {
@@ -189,6 +210,7 @@ int playGame(int status)
 
         goto NEWCOOR;
       }
+      temp.clear();
 
       //coorsO - original coordinates, coors - new coordinates
       spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]);
@@ -317,7 +339,10 @@ int playGame(int status)
 
       goto AGAIN;
     }
-  }
+  }  
+   
+  deleteSpots(spots);
+
   return 1;
 }
 

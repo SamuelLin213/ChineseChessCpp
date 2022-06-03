@@ -2,15 +2,15 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 SET(CMAKE_CXX_STANDARD 11)
 
-ADD_SUBDIRECTORY(${CMAKE_BINARY_DIR}/googletest)
+ADD_SUBDIRECTORY(googletest)
+
+ADD_EXECUTABLE(game
+	main.cpp
+	chessBoardSpot.cpp
+)
 
 ADD_EXECUTABLE(test
 	test.cpp
-)
-
-ADD_EXECUTABLE(horseTest
-	test.cpp
-	horseMove_test.h
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
