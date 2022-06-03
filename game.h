@@ -337,8 +337,9 @@ void loadGame(ChessBoardSpot** spots)
 
 void saveGame(ChessBoardSpot** spots)
 {
-  // ofstream outData;
-  // outData.open("coordinates.txt");
+  ofstream outData;
+  outData.open("coordinates.txt");
+
   //
   // for(int x = 0; x < 16; x++)
   // {
@@ -348,6 +349,8 @@ void saveGame(ChessBoardSpot** spots)
   //   }
   //   outData << blackCoors[x][2] << endl;
   // }
+
+  outData.close();
 }
 
 #endif
