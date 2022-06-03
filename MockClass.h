@@ -101,4 +101,47 @@ public:
         return move;
     }
 };
+
+class ChariotMock_ChessBoardSpot {
+public:
+    enum colorEnum {
+        RED,
+        BLACK,
+        NONE
+    };
+
+    colorEnum color;
+    validMove* move;
+
+    ChariotMock_ChessBoardSpot() {
+        color = BLACK;
+        move = new chariotMove();
+    }
+
+    validMove* getMove() {
+        return move;
+    }
+};
+
+class HorseMock_ChessBoardSpot {
+public:
+    enum colorEnum {
+        RED,
+        BLACK,
+        NONE
+    };
+
+    colorEnum color;
+    validMove* move;
+
+    HorseMock_ChessBoardSpot() {
+        color = BLACK;
+        move = new horseMove();
+    }
+
+    validMove* getMove() {
+        return move;
+    }
+};
+
 #endif
