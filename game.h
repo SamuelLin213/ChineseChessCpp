@@ -3,6 +3,7 @@
 
 #include "enums.h"
 #include "chessDisplay.h"
+#include <limits>
 #include "chessBoardSpot.h"
 #include <unordered_map>
 using namespace std;

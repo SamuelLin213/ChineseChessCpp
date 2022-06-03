@@ -4,6 +4,11 @@ SET(CMAKE_CXX_STANDARD 11)
 
 ADD_SUBDIRECTORY(googletest)
 
+ADD_EXECUTABLE(game
+	main.cpp
+	chessBoardSpot.cpp
+)
+
 ADD_EXECUTABLE(test
 	test.cpp
 )
