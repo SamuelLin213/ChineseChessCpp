@@ -52,7 +52,7 @@ void deleteSpots(ChessBoardSpot** spots)
 
 int playGame(int status)
 {
-
+  bool check = false;
   bool done = false; // when checkmate or end of game(quit/save)
   string pieceChoice;
   int targetLocation[2]; // new coordinates
@@ -86,6 +86,19 @@ int playGame(int status)
     cout << endl << endl;
 
     printBoard(status, spots);
+
+    if(check)
+    {
+        redTurn = !redTurn;
+        string winTeam = (redTurn) ? "Red team" : "Black team";
+        cout << endl << YELLOW << "Checkmate! " << winTeam << " won!" << endl;
+        cin.ignore();
+        cin.get();
+        cout << RESET;
+
+        done = true;
+        break;
+    }
 
     cout << "Enter the coordinates of the piece to select, or enter 0 to quit: ";
     cin >> chosenPiece[0];
@@ -205,22 +218,16 @@ int playGame(int status)
           {
             kingCoor[0] = targetLocation[0];
             kingCoor[1] = targetLocation[1];
-            cout << "New general coor: " << kingCoor[0] << " " << kingCoor[1] << endl;
-            cin.ignore();
-            cin.get();
           }
           else if(spots[chosenPiece[1]][chosenPiece[0]].getColor() == RED)
           {
             kingCoor[2] = targetLocation[0];
             kingCoor[3] = targetLocation[1];
-            cout << "New general coor: " << kingCoor[2] << " " << kingCoor[3] << endl;
-            cin.ignore();
-            cin.get();
           }
         }
         if(spots[targetLocation[1]][targetLocation[0]].getPiece() == GENERAL)
         {
-          done = true;
+          check = true;
         }
 
         spots[targetLocation[1]][targetLocation[0]].cpy(spots[chosenPiece[1]][chosenPiece[0]]);
@@ -236,14 +243,6 @@ int playGame(int status)
 
         goto AGAIN;
       }
-      if(done)
-      {
-        string winTeam = (redTurn) ? "Team red" : "Team black";
-        cout << endl << YELLOW << "Checkmate! " << winTeam << " won!" << endl;
-        cin.ignore();
-        cin.get();
-        cout << RESET;
-      }
       redTurn = !redTurn; // inverses so that it's the other player's turn
     }
     else{
@@ -252,7 +251,7 @@ int playGame(int status)
 
       goto AGAIN;
     }
-  }  
+  }
    
   deleteSpots(spots);
 
