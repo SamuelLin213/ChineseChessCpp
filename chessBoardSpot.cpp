@@ -10,7 +10,7 @@ ChessBoardSpot::ChessBoardSpot(pieceTypeEnum piece_, colorEnum color_, char boar
 
 ChessBoardSpot::ChessBoardSpot()
 {
-  move = new validMove();
+  //move = new validMove();
   move = nullptr;
   piece = EMPTY;
   color = NONE;

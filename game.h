@@ -106,12 +106,14 @@ int playGame(int status)
 
     if(chosenPiece[0] == 0)
     {
+      deleteSpots(spots);
       return 3;
     }
     cin >> chosenPiece[1];
 
     if(chosenPiece[1] == 0)
     {
+      deleteSpots(spots);
       return 3;
     }
     if(chosenPiece[0] < 0 || chosenPiece[0] > BOARD_WIDTH || chosenPiece[1] < 0 || chosenPiece[1] > BOARD_HEIGHT)
@@ -164,6 +166,7 @@ int playGame(int status)
 
       if(targetLocation[0] == 0)
       {
+        deleteSpots(spots); 
         return 3;
       }
 
@@ -171,6 +174,7 @@ int playGame(int status)
 
       if(targetLocation[1] == 0)
       {
+        deleteSpots(spots);
         return 3;
       }
 
@@ -331,8 +335,8 @@ int playGame(int status)
 
       goto AGAIN;
     }
-  }
-
+  }  
+   
   deleteSpots(spots);
 
   return 1;
