@@ -82,9 +82,25 @@ public:
         move = new powMove();
     }
 
+
+class SoldierMock_ChessBoardSpot {
+public:
+    enum colorEnum {
+        RED,
+        BLACK,
+        NONE
+    };
+
+    colorEnum color;
+    validMove* move;
+
+    SoldierMock_ChessBoardSpot() {
+        color = BLACK;
+        move = new soldierMove();
+    }
+
     validMove* getMove() {
         return move;
     }
-
 };
 #endif

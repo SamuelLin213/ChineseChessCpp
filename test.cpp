@@ -3,6 +3,7 @@
 #include "generalMove_test.h"
 #include "advisorMove_test.h"
 #include "elephantMove_test.h"
+#include "soldierMove_test.h"
 #include "powMove_test.h"
 #include "horseMove_test.h"
 
