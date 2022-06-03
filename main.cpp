@@ -33,8 +33,6 @@ int main()
       }
       case 2: // Choice to continue saved game
       {
-        // loadGame();
-
         choice = playGame(2);
         break;
       }

@@ -44,14 +44,10 @@ void deleteSpots(ChessBoardSpot** spots)
 {
   for(int x = 0; x < BOARD_HEIGHT; x++)
   {
-    // for(int y = 0; y < BOARD_HEIGHT; y++)
-    // {
-    //   delete spots[x][y];
-    // }
     if(spots[x] != nullptr)
         delete [] spots[x]; 
   }
-  delete [] spots; // deletes spots[height]
+  delete [] spots; 
 }
 
 int playGame(int status)
@@ -65,15 +61,6 @@ int playGame(int status)
 
   ChessBoardSpot** spots = new ChessBoardSpot*[BOARD_HEIGHT];
 
-  // don't need this manual pushing of names anymore -- use name inside spot
-  // pieces.push_back("general");
-  // pieces.push_back("advisor");
-  // pieces.push_back("elephant");
-  // pieces.push_back("horse");
-  // pieces.push_back("chariot");
-  // pieces.push_back("pow");
-  // pieces.push_back("soldier");
-
   initializeSpots(spots);
 
   if(status == 1)
@@ -84,8 +71,6 @@ int playGame(int status)
   {
     loadGame(spots);
   }
-
-  // updateChars(status, spots);
 
   while(!done)
   {
@@ -128,7 +113,6 @@ int playGame(int status)
     chosenPiece[0] -= 1;
     chosenPiece[1] -= 1;
 
-    //ChessBoardSpot temp = spots[0][0];
     ChessBoardSpot temp(spots[chosenPiece[1]][chosenPiece[0]]);
 
     if(temp.getPiece() == EMPTY)
@@ -212,7 +196,6 @@ int playGame(int status)
       }
       temp.clear();
 
-      //coorsO - original coordinates, coors - new coordinates
       spots[chosenPiece[1]][chosenPiece[0]].getMove()->setCoors(chosenPiece[0], chosenPiece[1], targetLocation[0], targetLocation[1]);
       if(spots[chosenPiece[1]][chosenPiece[0]].getMove()->move(spotOccupied, spots[chosenPiece[1]][chosenPiece[0]].getColor(), kingCoor))
       {
@@ -240,80 +223,11 @@ int playGame(int status)
           done = true;
         }
 
-        //ChessBoardSpot tempSpot(spots[chosenPiece[1]][chosenPiece[0]]);
-        //spots[targetLocation[1]][targetLocation[0]].clear();
         spots[targetLocation[1]][targetLocation[0]].cpy(spots[chosenPiece[1]][chosenPiece[0]]);
         spots[chosenPiece[1]][chosenPiece[0]].clear();
         spotOccupied[targetLocation[1]][targetLocation[0]] = true;
         spotOccupied[chosenPiece[1]][chosenPiece[0]] = false;
 
-        if(spots[targetLocation[1]][targetLocation[0]].getMove() == nullptr)
-        {
-          cout << "Target has null pointer!" << endl;
-          cin.ignore();
-          cin.get();
-        }
-        else {
-          switch(spots[targetLocation[1]][targetLocation[0]].getPiece())
-          {
-            case GENERAL:
-            {
-              cout << "Target has gen pointer!" << endl;
-              cin.ignore();
-              cin.get();
-              break;
-            }
-            case ADVISOR:
-            {
-              cout << "Target has adv pointer!" << endl;
-              cin.ignore();
-              cin.get();
-              break;
-            }
-            case ELEPHANT:
-            {
-              cout << "Target has elephant pointer!" << endl;
-              cin.ignore();
-              cin.get();
-              break;
-            }
-            case HORSE:
-            {
-              cout << "Target has horse pointer!" << endl;
-              cin.ignore();
-              cin.get();
-              break;
-            }
-            case CHARIOT:
-            {
-              cout << "Target has chariot pointer!" << endl;
-              cin.ignore();
-              cin.get();
-              break;
-            }
-            case CANNON:
-            {
-              cout << "Target has cannon pointer!" << endl;
-              cin.ignore();
-              cin.get();
-              break;
-            }
-            case SOLDIER:
-            {
-              cout << "Target has soldier pointer!" << endl;
-              cin.ignore();
-              cin.get();
-              break;
-            }
-            default:
-            {
-              cout << "???" << endl;
-              cin.ignore();
-              cin.get();
-              break;
-            }
-          }
-        }
       }
       else{
         cout << "Invalid move! Please try again.";
@@ -330,7 +244,6 @@ int playGame(int status)
         cin.get();
         cout << RESET;
       }
-      // Check target spot is empty
       redTurn = !redTurn; // inverses so that it's the other player's turn
     }
     else{

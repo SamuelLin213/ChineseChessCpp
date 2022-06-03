@@ -5,13 +5,6 @@
 #include "chessBoardSpot.h"
 using namespace std;
 
-// Stores char of spots on chessbaord
-vector<vector<char>> boardChars(10, vector<char>(9, '*'));
-
-vector<string> pieces; // stores string of pieces
-int NUM_PIECES = 7; // constant for piece numbers
-int PIECE_TOTAL = 16; // constant for total pieces per team
-
 // Board dimensions
 int BOARD_WIDTH = 9;
 int BOARD_HEIGHT = 10;
@@ -20,10 +13,6 @@ int BOARD_HEIGHT = 10;
 //  {blackKingX, blackKingY, redKingX, redKingY}
 vector<int> kingCoor(4);
 bool spotOccupied[10][9]; // Stores status of each spot on board
-
-// Vectors of coordinates, for input/output to textfile
-// vector<vector<int>> redCoors(16, vector<int>(3, 0));
-// vector<vector<int>> blackCoors(16, vector<int>(3, 0));
 
 void clearSpots(ChessBoardSpot** spots)
 {

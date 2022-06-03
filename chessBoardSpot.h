@@ -4,7 +4,6 @@
 #include <string>
 #include "enums.h"
 #include "validMove.h"
-// #include "piece.h"
 
 using namespace std;
 
@@ -16,14 +15,10 @@ class ChessBoardSpot{
     ChessBoardSpot(const ChessBoardSpot &cpyObj);
     ChessBoardSpot(pieceTypeEnum piece_, colorEnum color_, char boardChar_, validMove* move_);
 
-    void setData(pieceTypeEnum piece_, colorEnum color_,
-    char boardChar_, validMove* move_);
+    void setData(pieceTypeEnum piece_, colorEnum color_, char boardChar_, validMove* move_);
 
     void setColor(colorEnum color_);
     colorEnum getColor() const;
-
-    // void setOccupied(bool occupied_);
-    // bool getOccupied();
 
     pieceTypeEnum getPiece() const;
     string getPieceStr();
@@ -48,7 +43,6 @@ class ChessBoardSpot{
     }
   private:
     pieceTypeEnum piece = EMPTY;
-    // bool occupied = false;
     colorEnum color = NONE;
     char boardChar = '*';
     validMove* move = nullptr;
