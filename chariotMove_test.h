@@ -1,5 +1,5 @@
-#ifndef CHARIOTmOVE_TEST_HPP
-#define POWMOVE_TEST_HPP
+#ifndef CHARIOT_TEST_HPP
+#define CHARIOT_TEST_HPP
 
 #include "gtest/gtest.h"
 #include "validMove.h"
