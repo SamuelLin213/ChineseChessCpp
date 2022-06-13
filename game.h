@@ -12,6 +12,7 @@ bool saved = false;
 bool redTurn = true;
 
 void loadGame(ChessBoardSpot** spots);
+void saveGame(ChessBoardSpot** spots);
 
 void printIndex() {
   cout << "PIECE INDEX: " << endl;
@@ -45,9 +46,9 @@ void deleteSpots(ChessBoardSpot** spots)
   for(int x = 0; x < BOARD_HEIGHT; x++)
   {
     if(spots[x] != nullptr)
-        delete [] spots[x]; 
+        delete [] spots[x];
   }
-  delete [] spots; 
+  delete [] spots;
 }
 
 int playGame(int status)
@@ -105,6 +106,7 @@ int playGame(int status)
 
     if(chosenPiece[0] == 0)
     {
+      saveGame(spots);
       deleteSpots(spots);
       return 3;
     }
@@ -112,6 +114,7 @@ int playGame(int status)
 
     if(chosenPiece[1] == 0)
     {
+      saveGame(spots);
       deleteSpots(spots);
       return 3;
     }
@@ -164,7 +167,8 @@ int playGame(int status)
 
       if(targetLocation[0] == 0)
       {
-        deleteSpots(spots); 
+        saveGame(spots);
+        deleteSpots(spots);
         return 3;
       }
 
@@ -172,6 +176,7 @@ int playGame(int status)
 
       if(targetLocation[1] == 0)
       {
+        saveGame(spots);
         deleteSpots(spots);
         return 3;
       }
@@ -252,7 +257,7 @@ int playGame(int status)
       goto AGAIN;
     }
   }
-   
+
   deleteSpots(spots);
 
   return 1;
@@ -260,11 +265,22 @@ int playGame(int status)
 
 void loadGame(ChessBoardSpot** spots)
 {
+  char turn;
+
   vector<vector<int>> blackCoors(16, vector<int>(2, 0));
   vector<vector<int>> redCoors(16, vector<int>(2, 0));
 
   ifstream inData;
   inData.open("coordinates.txt");
+
+  inData >> turn;
+  if(tolower(turn) == 'r')
+  {
+    redTurn = true;
+  }
+  else{
+    redTurn = false;
+  }
 
   for(int x = 0; x < 16; x++)
   {
@@ -282,48 +298,80 @@ void loadGame(ChessBoardSpot** spots)
   }
 
   // Creating black pieces
-  spots[blackCoors[0][0]][blackCoors[0][1]].setData(GENERAL, BLACK, 'G', new generalMove());
-  spots[blackCoors[1][0]][blackCoors[1][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
-  spots[blackCoors[2][0]][blackCoors[2][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
-  spots[blackCoors[3][0]][blackCoors[3][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
-  spots[blackCoors[4][0]][blackCoors[4][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
-  spots[blackCoors[5][0]][blackCoors[5][1]].setData(HORSE,  BLACK, 'H', new horseMove());
-  spots[blackCoors[6][0]][blackCoors[6][1]].setData(HORSE,  BLACK, 'H', new horseMove());
-  spots[blackCoors[7][0]][blackCoors[7][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
-  spots[blackCoors[8][0]][blackCoors[8][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
-  spots[blackCoors[9][0]][blackCoors[9][1]].setData(CANNON,  BLACK, 'P', new powMove());
-  spots[blackCoors[10][0]][blackCoors[10][1]].setData(CANNON,  BLACK, 'P', new powMove());
-  spots[blackCoors[11][0]][blackCoors[11][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  spots[blackCoors[12][0]][blackCoors[12][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  spots[blackCoors[13][0]][blackCoors[13][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  spots[blackCoors[14][0]][blackCoors[14][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
-  spots[blackCoors[15][0]][blackCoors[15][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  if(blackCoors[0][0] != -1 && blackCoors[0][1] != -1)
+    spots[blackCoors[0][0]][blackCoors[0][1]].setData(GENERAL, BLACK, 'G', new generalMove());
+  if(blackCoors[1][0] != -1 && blackCoors[1][1] != -1)
+    spots[blackCoors[1][0]][blackCoors[1][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  if(blackCoors[2][0] != -1 && blackCoors[2][1] != -1)
+    spots[blackCoors[2][0]][blackCoors[2][1]].setData(ADVISOR, BLACK, 'A', new advisorMove());
+  if(blackCoors[3][0] != -1 && blackCoors[3][1] != -1)
+    spots[blackCoors[3][0]][blackCoors[3][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  if(blackCoors[4][0] != -1 && blackCoors[4][1] != -1)
+    spots[blackCoors[4][0]][blackCoors[4][1]].setData(ELEPHANT, BLACK, 'E', new elephantMove());
+  if(blackCoors[5][0] != -1 && blackCoors[5][1] != -1)
+    spots[blackCoors[5][0]][blackCoors[5][1]].setData(HORSE,  BLACK, 'H', new horseMove());
+  if(blackCoors[6][0] != -1 && blackCoors[6][1] != -1)
+    spots[blackCoors[6][0]][blackCoors[6][1]].setData(HORSE,  BLACK, 'H', new horseMove());
+  if(blackCoors[7][0] != -1 && blackCoors[7][1] != -1)
+    spots[blackCoors[7][0]][blackCoors[7][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
+  if(blackCoors[8][0] != -1 && blackCoors[8][1] != -1)
+    spots[blackCoors[8][0]][blackCoors[8][1]].setData(CHARIOT,  BLACK, 'C', new chariotMove());
+  if(blackCoors[9][0] != -1 && blackCoors[9][1] != -1)
+    spots[blackCoors[9][0]][blackCoors[9][1]].setData(CANNON,  BLACK, 'P', new powMove());
+  if(blackCoors[10][0] != -1 && blackCoors[10][1] != -1)
+    spots[blackCoors[10][0]][blackCoors[10][1]].setData(CANNON,  BLACK, 'P', new powMove());
+  if(blackCoors[11][0] != -1 && blackCoors[11][1] != -1)
+    spots[blackCoors[11][0]][blackCoors[11][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  if(blackCoors[12][0] != -1 && blackCoors[12][1] != -1)
+    spots[blackCoors[12][0]][blackCoors[12][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  if(blackCoors[13][0] != -1 && blackCoors[13][1] != -1)
+    spots[blackCoors[13][0]][blackCoors[13][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  if(blackCoors[14][0] != -1 && blackCoors[14][1] != -1)
+    spots[blackCoors[14][0]][blackCoors[14][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
+  if(blackCoors[15][0] != -1 && blackCoors[15][1] != -1)
+    spots[blackCoors[15][0]][blackCoors[15][1]].setData(SOLDIER, BLACK, 'S', new soldierMove());
   kingCoor[0] = blackCoors[0][1];
   kingCoor[1] = blackCoors[0][0];
 
   // Creating red pieces
-  spots[redCoors[0][0]][redCoors[0][1]].setData(GENERAL,  RED, 'G', new generalMove());
-  spots[redCoors[1][0]][redCoors[1][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
-  spots[redCoors[2][0]][redCoors[2][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
-  spots[redCoors[3][0]][redCoors[3][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
-  spots[redCoors[4][0]][redCoors[4][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
-  spots[redCoors[5][0]][redCoors[5][1]].setData(HORSE,  RED, 'H', new horseMove());
+  if(redCoors[0][0] != -1 && redCoors[0][1] != -1)
+    spots[redCoors[0][0]][redCoors[0][1]].setData(GENERAL,  RED, 'G', new generalMove());
+  if(redCoors[1][0] != -1 && redCoors[1][1] != -1)
+    spots[redCoors[1][0]][redCoors[1][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
+  if(redCoors[2][0] != -1 && redCoors[2][1] != -1)
+    spots[redCoors[2][0]][redCoors[2][1]].setData(ADVISOR,  RED, 'A', new advisorMove());
+  if(redCoors[3][0] != -1 && redCoors[3][1] != -1)
+    spots[redCoors[3][0]][redCoors[3][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
+  if(redCoors[4][0] != -1 && redCoors[4][1] != -1)
+    spots[redCoors[4][0]][redCoors[4][1]].setData(ELEPHANT,  RED, 'E', new elephantMove());
+  if(redCoors[5][0] != -1 && redCoors[5][1] != -1)
+    spots[redCoors[5][0]][redCoors[5][1]].setData(HORSE,  RED, 'H', new horseMove());
+  if(redCoors[6][0] != -1 && redCoors[6][1] != -1)
   spots[redCoors[6][0]][redCoors[6][1]].setData(HORSE,  RED, 'H', new horseMove());
+  if(redCoors[7][0] != -1 && redCoors[7][1] != -1)
   spots[redCoors[7][0]][redCoors[7][1]].setData(CHARIOT,  RED, 'C', new chariotMove());
+  if(redCoors[8][0] != -1 && redCoors[8][1] != -1)
   spots[redCoors[8][0]][redCoors[8][1]].setData(CHARIOT,  RED, 'C', new chariotMove());
+  if(redCoors[9][0] != -1 && redCoors[9][1] != -1)
   spots[redCoors[9][0]][redCoors[9][1]].setData(CANNON,  RED, 'P', new powMove());
+  if(redCoors[10][0] != -1 && redCoors[10][1] != -1)
   spots[redCoors[10][0]][redCoors[10][1]].setData(CANNON,  RED, 'P', new powMove());
+  if(redCoors[11][0] != -1 && redCoors[11][1] != -1)
   spots[redCoors[11][0]][redCoors[11][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  if(redCoors[12][0] != -1 && redCoors[12][1] != -1)
   spots[redCoors[12][0]][redCoors[12][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  if(redCoors[13][0] != -1 && redCoors[13][1] != -1)
   spots[redCoors[13][0]][redCoors[13][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  if(redCoors[14][0] != -1 && redCoors[14][1] != -1)
   spots[redCoors[14][0]][redCoors[14][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
+  if(redCoors[15][0] != -1 && redCoors[15][1] != -1)
   spots[redCoors[15][0]][redCoors[15][1]].setData(SOLDIER,  RED, 'S', new soldierMove());
   kingCoor[0] = redCoors[0][1];
   kingCoor[1] = redCoors[0][0];
 
-  for(int x = 0; x < 10; x++)
+  for(int x = 0; x < BOARD_HEIGHT; x++)
   {
-    for(int y = 0; y < 9; y++)
+    for(int y = 0; y < BOARD_WIDTH; y++)
     {
       if(spots[x][y].getPiece() == EMPTY)
         spotOccupied[x][y] = false;
@@ -335,20 +383,241 @@ void loadGame(ChessBoardSpot** spots)
   inData.close();
 }
 
+bool findPiece(ChessBoardSpot** spots, colorEnum color, pieceTypeEnum piece, vector<int> &coors)
+{
+  coors.clear();
+  for(int y = 0; y < BOARD_HEIGHT; y++)
+  {
+    for(int x = 0; x < BOARD_WIDTH; x++)
+    {
+      if(spots[y][x].getColor() == color && spots[y][x].getPiece() == piece)
+      {
+        coors.push_back(y);
+        coors.push_back(x);
+      }
+    }
+  }
+  if(coors.size() > 0)
+    return true;
+  return false;
+}
+
 void saveGame(ChessBoardSpot** spots)
 {
+  char saveChoice = 'n';
+
+  cin.clear();
+  cin.ignore();
+
+  cout << endl << "Quitting the game. Save current game? <y/n>: ";
+  cin.get(saveChoice);
+
+  if(tolower(saveChoice) == 'n')
+  {
+    return;
+  }
+
   ofstream outData;
   outData.open("coordinates.txt");
 
-  //
-  // for(int x = 0; x < 16; x++)
-  // {
-  //   for(int y = 0; y < 2; y++)
-  //   {
-  //     outData << blackCoors[x][y] << " ";
-  //   }
-  //   outData << blackCoors[x][2] << endl;
-  // }
+  if(redTurn)
+  {
+    outData << "r" << endl;
+  }
+  else{
+    outData << "b" << endl;
+  }
+
+  vector<int> coordinate;
+  //Black pieces
+  if(findPiece(spots, BLACK, GENERAL, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, BLACK, ADVISOR, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, BLACK, ELEPHANT, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, BLACK, HORSE, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, BLACK, CHARIOT, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, BLACK, CANNON, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, BLACK, SOLDIER, coordinate))
+  {
+    for(int x = 0; x < coordinate.size(); x++)
+    {
+      outData << coordinate[x] << " ";
+      if(x % 2 == 1)
+        outData << endl;
+    }
+    for(int y = coordinate.size(); y < 10; y++)
+    {
+      outData << -1 << " ";
+      if(y % 2 == 1)
+        outData << endl;
+    }
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+
+  //Red pieces
+  if(findPiece(spots, RED, GENERAL, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, RED, ADVISOR, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, RED, ELEPHANT, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, RED, HORSE, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, RED, CHARIOT, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, RED, CANNON, coordinate))
+  {
+    outData << coordinate[0] << " " << coordinate[1] << endl;
+    if(coordinate.size() == 2)
+      outData << -1 << " " << -1 << endl;
+    else
+      outData << coordinate[2] << " " << coordinate[3] << endl;
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
+  if(findPiece(spots, RED, SOLDIER, coordinate))
+  {
+    for(int x = 0; x < coordinate.size(); x++)
+    {
+      outData << coordinate[x] << " ";
+      if(x % 2 == 1)
+        outData << endl;
+    }
+    for(int y = coordinate.size(); y < 10; y++)
+    {
+      outData << -1 << " ";
+      if(y % 2 == 1)
+        outData << endl;
+    }
+  }
+  else
+  {
+    outData << -1 << " " << -1 << endl;
+    outData << -1 << " " << -1 << endl;
+  }
 
   outData.close();
 }
